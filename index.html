@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AAM Design Solutions Web | Consultoría y Desarrollo</title>
+  <meta name="author" content="Andrea Andrade Mejía">
+  <meta name="description"
+    content="Soluciones digitales integrales: Diseño Web, Facturación Automática y Estrategia Digital en Zapopan, Jalisco.">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+  <style>
+    /* Clase específica para asegurar que NADA lo corte */
+    .btn-presupuesto {
+      white-space: nowrap;
+      /* Evita que el texto se rompa en dos líneas */
+      display: inline-flex;
+      box-sizing: border-box;
+      /* Asegura que el padding no deforme el tamaño */
+      min-width: fit-content;
+    }
+  </style>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'bg-dark': '#1f242d',
+            'bg-second': '#323946',
+            'main-cyan': '#0ef',
+            'main-pink': 'rgb(179, 72, 168)',
+          },
+          fontFamily: {
+            poppins: ['Poppins', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+</head>
+
+<body class="bg-bg-dark text-white font-poppins overflow-x-hidden">
+
+  <header
+    class="fixed top-0 left-0 w-full px-[9%] py-6 bg-bg-dark/95 backdrop-blur-sm flex justify-between items-center z-[100] border-b border-white/5">
+    <div class="logo">
+      <a href="#" class="text-2xl font-black tracking-tight hover:text-main-cyan transition-colors">AAM <span
+          class="text-main-cyan text-sm block md:inline font-normal">Design Solutions</span></a>
+    </div>
+
+    <nav id="navbar" class="hidden md:flex items-center gap-8">
+      <a href="#home"
+        class="text-lg font-medium hover:text-main-cyan transition-colors active text-main-cyan">Inicio</a>
+      <a href="#about" class="text-lg font-medium hover:text-main-cyan transition-colors">Nosotros</a>
+      <a href="#services" class="text-lg font-medium hover:text-main-cyan transition-colors">Servicios</a>
+      <a href="#portfolio" class="text-lg font-medium hover:text-main-cyan transition-colors">Proyectos</a>
+      <a href="#contact"
+        class="text-lg font-medium hover:text-main-cyan transition-colors border-2 border-main-cyan px-4 py-1 rounded-full">Cotizar</a>
+    </nav>
+
+    <i class='bx bx-menu text-4xl cursor-pointer md:hidden text-main-cyan' id="menu-icon"></i>
+  </header>
+
+  <main>
+    <section id="home"
+      class="min-h-screen flex flex-col md:flex-row items-center justify-center gap-12 px-[9%] pt-24 pb-12">
+      <div class="flex-1 space-y-4 text-center md:text-left">
+        <h3 class="text-2xl md:text-3xl font-bold">Bienvenido a la Era Digital</h3>
+        <h1 class="text-5xl md:text-7xl font-black leading-tight">AAM Design</h1>
+        <h3 class="text-xl md:text-2xl font-semibold">
+          Expertos en <span class="text-main-cyan text-[#0ef]">Soluciones de Facturación y Web Pro</span>
+        </h3>
+        <p class="text-gray-400 max-w-xl text-lg">
+          No solo hacemos páginas; construimos los cimientos digitales de tu negocio. Eficiencia administrativa y diseño
+          de alto impacto.
+        </p>
+
+        <div class="flex gap-5 justify-center md:justify-start pt-6">
+          <a href="https://www.facebook.com/profile.php?id=61586688913332&locale=es_LA" target="_blank"
+            class="group w-12 h-12 flex items-center justify-center rounded-full border-2 border-[#0ef] text-[#0ef] text-2xl hover:bg-[#0ef] hover:text-[#081b29] transition-all duration-300 shadow-[0_0_10px_#0ef]">
+            <i class='bx bxl-facebook group-hover:rotate-[360deg] transition-transform duration-500'></i>
+          </a>
+
+          <a href="https://aamdesingsoluctionsweb.com/" target="_blank"
+            class="w-12 h-12 flex items-center justify-center rounded-full border-2 border-[#0ef] text-[#0ef] text-2xl hover:bg-[#0ef] hover:text-[#081b29] transition-all duration-300 shadow-[0_0_10px_#0ef]">
+            <i class='bx bx-globe animate-[spin_6s_linear_infinite]'></i>
+          </a>
+
+          <a href="https://wa.me/523313862743?text=Hola,%20busco%20asesoría%20digital" target="_blank"
+            class="w-12 h-12 flex items-center justify-center rounded-full border-2 border-[#0ef] text-[#0ef] text-2xl hover:bg-[#0ef] hover:text-[#081b29] transition-all duration-300 shadow-[0_0_15px_#0ef] animate-bounce">
+            <i class='bx bxl-whatsapp'></i>
+          </a>
+        </div>
+
+        <div class="pt-10">
+          <a href="#contact"
+            class="btn-presupuesto inline-flex items-center justify-center px-10 py-4 bg-[#0ef] text-[#081b29] font-bold rounded-full text-lg transition-all duration-300 hover:scale-105 hover:shadow-[0_0_25px_#0ef] m-1">
+            Solicitar Presupuesto
+          </a>
+        </div>
+      </div>
+
+      <div class="flex-1 flex justify-center items-center">
+        <div class="relative w-[300px] md:w-[450px]">
+          <div class="absolute inset-0 bg-[#0ef]/20 rounded-full blur-3xl animate-pulse"></div>
+          <img src="images/Gemini_Generated_Image_pxuus6pxuus6pxuu.png" alt="Andrea Andrade"
+            class="relative z-10 w-full rounded-3xl border-b-8 border-r-8 border-[#0ef] drop-shadow-2xl grayscale hover:grayscale-0 transition-all duration-500">
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="py-24 px-[9%] bg-bg-second">
+      <h2 class="text-4xl md:text-5xl font-black text-center mb-16">Nuestros <span
+          class="text-main-cyan">Servicios</span></h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div
+          class="bg-bg-dark p-10 rounded-3xl border-2 border-transparent hover:border-main-cyan transition-all duration-500 group text-center hover:-translate-y-3">
+          <i class='bx bx-layout text-7xl text-main-cyan group-hover:scale-110 transition-transform block mb-4'></i>
+          <h3 class="text-2xl font-bold mb-3">Diseño Web Pro</h3>
+          <p class="text-gray-400">Páginas personalizadas: Básicas, Profesionales y Completas con optimización SEO para
+            Google.</p>
+        </div>
+
+        <div
+          class="bg-bg-dark p-10 rounded-3xl border-2 border-transparent hover:border-main-cyan transition-all duration-500 group text-center hover:-translate-y-3">
+          <i class='bx bx-receipt text-7xl text-main-cyan group-hover:scale-110 transition-transform block mb-4'></i>
+          <h3 class="text-2xl font-bold mb-3">Facturación & Sistemas</h3>
+          <p class="text-gray-400">Conectamos tu web a sistemas de facturación automática para tus clientes. Eficiencia
+            garantizada.</p>
+        </div>
+
+        <div
+          class="bg-bg-dark p-10 rounded-3xl border-2 border-transparent hover:border-main-cyan transition-all duration-500 group text-center hover:-translate-y-3">
+          <i
+            class='bx bx-cloud-server text-7xl text-main-cyan group-hover:scale-110 transition-transform block mb-4'></i>
+          <h3 class="text-2xl font-bold mb-3">Hosting & Dominios</h3>
+          <p class="text-gray-400">Configuración, conexión de dominio y mantenimiento técnico mensual. Tu web siempre
+            lista.</p>
+        </div>
+
+        <div
+          class="bg-bg-dark p-10 rounded-3xl border-2 border-transparent hover:border-main-cyan transition-all duration-500 group text-center hover:-translate-y-3">
+          <i class='bx bx-qr-code text-7xl text-main-cyan group-hover:scale-110 transition-transform block mb-4'></i>
+          <h3 class="text-2xl font-bold mb-3">Menús & Tarjetas QR</h3>
+          <p class="text-gray-400">Menús interactivos para restaurantes y tarjetas de presentación digitales de alta
+            tecnología.</p>
+        </div>
+
+        <div
+          class="bg-bg-dark p-10 rounded-3xl border-2 border-transparent hover:border-main-cyan transition-all duration-500 group text-center hover:-translate-y-3">
+          <i class='bx bxl-google text-7xl text-main-cyan group-hover:scale-110 transition-transform block mb-4'></i>
+          <h3 class="text-2xl font-bold mb-3">Google Business</h3>
+          <p class="text-gray-400">Creación y optimización de cuenta Google Business para aparecer en los primeros
+            lugares de Maps.</p>
+        </div>
+
+        <div
+          class="bg-bg-dark p-10 rounded-3xl border-2 border-transparent hover:border-main-cyan transition-all duration-500 group text-center hover:-translate-y-3">
+          <i class='bx bx-briefcase text-7xl text-main-cyan group-hover:scale-110 transition-transform block mb-4'></i>
+          <h3 class="text-2xl font-bold mb-3">Catálogos de Ventas</h3>
+          <p class="text-gray-400">Portafolios para freelancers y catálogos digitales diseñados para convertir visitas
+            en ventas.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="portfolio" class="py-24 px-[9%]">
+      <h2 class="text-4xl md:text-5xl font-black text-center mb-16">Nuestras <span class="text-main-cyan">Demos y
+          Soluciones</span></h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-6xl mx-auto">
+
+        <div class="group relative rounded-3xl overflow-hidden shadow-2xl h-[350px] border border-white/10">
+          <img src="images/Gemini_Generated_Image_ajdz3najdz3najdz.png" alt="Menú Digital Interactiva"
+            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-bg-dark via-bg-dark/40 to-transparent opacity-90 md:opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
+            <h4 class="text-2xl font-bold italic">Menú Digital Interactivo</h4>
+            <p class="text-main-cyan mb-4 font-medium text-sm">Ideal para: Cafeterías, Restaurantes y Bares.</p>
+            <p class="text-gray-200 text-sm mb-6">Carta digital con actualización en tiempo real y acceso vía QR.</p>
+            <a href="proyectos/proyecto1.html"
+              class="bg-main-cyan text-bg-dark px-6 py-2 rounded-xl font-bold self-start hover:scale-105 transition-transform">Ver
+              Demo en Vivo</a>
+          </div>
+        </div>
+
+        <div class="group relative rounded-3xl overflow-hidden shadow-2xl h-[350px] border border-white/10">
+          <img src="images/Gemini_Generated_Image_miim0xmiim0xmiim.png" alt="Web Corporativa"
+            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-bg-dark via-bg-dark/40 to-transparent opacity-90 md:opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
+            <h4 class="text-2xl font-bold italic">Sitio Web Corporativo</h4>
+            <p class="text-main-cyan mb-4 font-medium text-sm">Ideal para: Cafeterías, Bares, Ferreterías,
+              Refaccionarias y Servicios
+              Técnicos.</p>
+            <p class="text-gray-200 text-sm mb-6">Presencia profesional con catálogo de productos y botón de cotización.
+            </p>
+            <a href="proyectos/proyecto2.html"
+              class="bg-main-cyan text-bg-dark px-6 py-2 rounded-xl font-bold self-start hover:scale-105 transition-transform">Ver
+              Demo en Vivo</a>
+          </div>
+        </div>
+
+        <div class="group relative rounded-3xl overflow-hidden shadow-2xl h-[350px] border border-white/10">
+          <img src="images/Gemini_Generated_Image_ychs68ychs68ychs.png" alt="Sistema de Autofacturación"
+            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-bg-dark via-bg-dark/40 to-transparent opacity-90 md:opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
+            <h4 class="text-2xl font-bold italic">Módulo de Autofactura</h4>
+            <p class="text-main-cyan mb-4 font-medium text-sm">Solución para: Automatización de tickets y CFDI.</p>
+            <p class="text-gray-200 text-sm mb-6">Tus clientes se facturan solos desde tu web. Ahorra horas de oficina.
+            </p>
+            <a href="proyectos/proyecto3.html"
+              class="bg-main-cyan text-bg-dark px-6 py-2 rounded-xl font-bold self-start hover:scale-105 transition-transform">Ver
+              Demo en Vivo</a>
+          </div>
+        </div>
+
+        <div class="group relative rounded-3xl overflow-hidden shadow-2xl h-[350px] border border-white/10">
+          <img src="images/Gemini_Generated_Image_cmhff3cmhff3cmhf.png" alt="Catálogo Digital"
+            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-bg-dark via-bg-dark/40 to-transparent opacity-90 md:opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
+            <h4 class="text-2xl font-bold italic">Catálogo de Alta Conversión</h4>
+            <p class="text-main-cyan mb-4 font-medium text-sm">Ideal para: Freelancers, Agencias y Consultores.</p>
+            <p class="text-gray-200 text-sm mb-6">Muestra tus trabajos y cierra ventas con un diseño minimalista y pro.
+            </p>
+            <a href="proyectos/proyecto4.html"
+              class="bg-main-cyan text-bg-dark px-6 py-2 rounded-xl font-bold self-start hover:scale-105 transition-transform">Ver
+              Demo en Vivo</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="contact" class="py-24 px-[9%] bg-bg-second">
+      <h2 class="text-4xl md:text-5xl font-black text-center mb-16 italic">Contacto</h2>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 max-w-6xl mx-auto">
+        <div class="space-y-8">
+          <h3 class="text-3xl font-bold">¿Listo para empezar tu proyecto?</h3>
+          <p class="text-gray-400 text-lg">Hablemos sobre cómo AAM Design puede llevar tu administración y ventas al
+            siguiente nivel.</p>
+
+          <div class="space-y-6">
+            <div class="flex items-center gap-4">
+              <i class='bx bxl-whatsapp text-3xl text-main-cyan'></i>
+              <a href="https://wa.me/523313862743" class="text-xl hover:text-main-cyan transition-colors">Enviar
+                WhatsApp</a>
+            </div>
+            <div class="flex items-center gap-4">
+              <i class='bx bx-envelope text-3xl text-main-cyan'></i>
+              <a href="mailto:andreaandrademejia@gmail.com"
+                class="text-xl hover:text-main-cyan transition-colors">andreaandrademejia@gmail.com</a>
+            </div>
+            <div class="flex items-center gap-4">
+              <i class='bx bx-map text-3xl text-main-cyan'></i>
+              <span class="text-xl">Zapopan, Jalisco.</span>
+            </div>
+          </div>
+        </div>
+
+        <form id="form" class="bg-bg-dark p-8 rounded-3xl border border-white/5 space-y-4 shadow-2xl">
+          <input type="text" placeholder="Nombre completo"
+            class="w-full p-4 bg-bg-second rounded-xl border border-white/10 focus:border-main-cyan outline-none transition-colors">
+          <input type="email" placeholder="Correo electrónico"
+            class="w-full p-4 bg-bg-second rounded-xl border border-white/10 focus:border-main-cyan outline-none transition-colors">
+          <textarea placeholder="Cuéntanos sobre tu negocio o proyecto" rows="5"
+            class="w-full p-4 bg-bg-second rounded-xl border border-white/10 focus:border-main-cyan outline-none transition-colors"></textarea>
+          <button type="submit"
+            class="w-full py-4 bg-main-cyan text-bg-dark font-black rounded-xl hover:scale-[1.02] transition-transform">ENVIAR
+            CONSULTA</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-black py-10 px-[9%] flex flex-col md:flex-row justify-between items-center gap-8">
+    <p class="text-gray-500">Copyright &copy; 2026 by AAM Design Solutions Web | All Rights Reserved.</p>
+    <div class="flex gap-4">
+      <a href="#home" class="p-3 bg-bg-second rounded-xl hover:shadow-[0_0_15px_#0ef] transition-all"><i
+          class='bx bx-up-arrow-alt text-2xl'></i></a>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/scrollreveal"></script>
+  <script>
+    // Lógica básica para el menú móvil
+    const menuIcon = document.querySelector('#menu-icon');
+    const navbar = document.querySelector('#navbar');
+
+    menuIcon.onclick = () => {
+      menuIcon.classList.toggle('bx-x');
+      navbar.classList.toggle('hidden');
+      navbar.classList.toggle('flex');
+      navbar.classList.toggle('flex-col');
+      navbar.classList.toggle('absolute');
+      navbar.classList.toggle('top-full');
+      navbar.classList.toggle('left-0');
+      navbar.classList.toggle('w-full');
+      navbar.classList.toggle('bg-bg-dark');
+      navbar.classList.toggle('p-8');
+    };
+  </script>
+</body>
+
+</html>

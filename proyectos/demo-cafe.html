@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Origen Café | Demo AAM</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,900;1,900&family=Plus+Jakarta+Sans:wght@300;400;700&display=swap');
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #FDFBF7;
+      color: #452710;
+    }
+
+    h1,
+    h2,
+    .font-serif {
+      font-family: 'Playfair Display', serif;
+    }
+
+    .hero-cafe {
+      background: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.6)),
+        url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=2070&auto=format&fit=crop');
+      background-size: cover;
+      background-position: center;
+    }
+
+    .circular-card {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      border: 4px solid #fff;
+      box-shadow: 0 10px 20px rgba(120, 66, 18, 0.1);
+      transition: all 0.4s ease;
+    }
+
+    .circular-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 30px rgba(120, 66, 18, 0.2);
+    }
+
+    .circular-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .temp-option {
+      transition: all 0.3s ease;
+      cursor: pointer;
+      border: 2px solid transparent;
+    }
+
+    .temp-option:hover {
+      border-color: #D4A373;
+      background: #FFF;
+      transform: scale(1.02);
+    }
+
+    /* Estilos Galería */
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 2rem;
+      cursor: pointer;
+    }
+
+    .gallery-item img {
+      transition: transform 0.8s cubic-bezier(0.2, 1, 0.3, 1);
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.1);
+    }
+
+    .gallery-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(69, 39, 16, 0.4);
+      opacity: 0;
+      transition: opacity 0.4s;
+      display: flex;
+      items: center;
+      justify-content: center;
+    }
+
+    .gallery-item:hover .gallery-overlay {
+      opacity: 1;
+    }
+
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #FDFBF7;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #D4A373;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header
+    class="hero-cafe min-h-screen flex flex-col items-center justify-center text-center p-6 border-b-[12px] border-[#D4A373]">
+    <span class="uppercase tracking-[0.4em] text-xs font-bold text-[#8B5E3C] mb-4">Baristas desde 1994</span>
+    <h1 class="text-7xl md:text-9xl font-black text-[#452710] leading-tight">Origen<br><span
+        class="italic text-[#8B5E3C]">Café</span></h1>
+
+    <div class="mt-16 flex flex-col md:flex-row gap-6">
+      <button onclick="openTempSelector()"
+        class="bg-[#452710] text-white px-12 py-5 rounded-full font-bold shadow-2xl hover:bg-[#633a1a] transition-all flex items-center gap-3">
+        <i class='bx bx-coffee'></i> MENÚ DE BARRA
+      </button>
+      <button onclick="openModal('reposteria')"
+        class="bg-white text-[#452710] px-12 py-5 rounded-full font-bold shadow-lg hover:shadow-xl transition-all flex items-center gap-3 border border-stone-100">
+        <i class='bx bx-baguette'></i> REPOSTERÍA
+      </button>
+    </div>
+  </header>
+
+  <section class="py-32 px-[9%] max-w-7xl mx-auto">
+    <div class="grid md:grid-cols-2 gap-20 items-center">
+      <div class="relative">
+        <div class="absolute -top-10 -left-10 w-40 h-40 bg-[#E9EDC6] rounded-full -z-10 opacity-50"></div>
+        <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?q=80&w=2078&auto=format&fit=crop"
+          class="rounded-[3rem] shadow-2xl" alt="Molienda">
+      </div>
+      <div class="space-y-6">
+        <h2 class="text-5xl font-black italic text-[#452710]">El arte de la paciencia.</h2>
+        <p class="text-lg text-stone-600 leading-relaxed">
+          En Origen, creemos que el café perfecto no se hace, se cultiva. Seleccionamos granos de altura de fincas
+          sustentables, tostados en lotes pequeños para preservar cada nota de chocolate, cítricos y avellana.
+        </p>
+        <div class="pt-6">
+          <div
+            class="flex items-center gap-4 border-l-4 border-[#D4A373] pl-6 font-serif italic text-2xl text-[#8B5E3C]">
+            "Del grano a la taza, sin atajos."
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 px-[9%] bg-white/50">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl font-black italic">Momentos en Origen</h2>
+      <div class="h-1 w-16 bg-[#D4A373] mx-auto mt-4"></div>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[200px] md:auto-rows-[250px] max-w-7xl mx-auto">
+      <div class="gallery-item md:row-span-2">
+        <img src="https://images.unsplash.com/photo-1521017432531-fbd92d768814?q=80&w=2070&auto=format&fit=crop"
+          alt="Interior">
+        <div class="gallery-overlay"><i class='bx bx-search-alt text-white text-3xl'></i></div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?q=80&w=2070&auto=format&fit=crop"
+          alt="Café de especialidad">
+        <div class="gallery-overlay"><i class='bx bx-search-alt text-white text-3xl'></i></div>
+      </div>
+      <div class="gallery-item md:col-span-2">
+        <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?q=80&w=2047&auto=format&fit=crop"
+          alt="Barra">
+        <div class="gallery-overlay"><i class='bx bx-search-alt text-white text-3xl'></i></div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=2070&auto=format&fit=crop"
+          alt="Ambiente">
+        <div class="gallery-overlay"><i class='bx bx-search-alt text-white text-3xl'></i></div>
+      </div>
+      <div class="gallery-item md:col-span-2">
+        <img src="https://images.unsplash.com/photo-1507133750040-4a8f57021571?q=80&w=1974&auto=format&fit=crop"
+          alt="Detalle taza">
+        <div class="gallery-overlay"><i class='bx bx-search-alt text-white text-3xl'></i></div>
+      </div>
+      <div class="gallery-item">
+        <img src="/images/Gemini_Generated_Image_itjvygitjvygitjv.png" alt="Reposteria local">
+        <div class="gallery-overlay"><i class='bx bx-search-alt text-white text-3xl'></i></div>
+      </div>
+      <div class="gallery-item">
+        <img src="/images/Gemini_Generated_Image_vdd78vdd78vdd78v.png" alt="pastel y frappe">
+        <div class="gallery-overlay"><i class='bx bx-search-alt text-white text-3xl'></i></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-[#FAEDCD] py-24 px-[9%]">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl font-black mb-4 italic">Visítanos en el Barrio</h2>
+      <p class="text-[#8B5E3C] uppercase tracking-widest text-sm font-bold">Calle del Aroma #123, Zapopan, Jalisco.</p>
+    </div>
+    <div class="max-w-5xl mx-auto rounded-[3rem] overflow-hidden h-[450px] shadow-2xl border-[15px] border-white">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d59714.24838392178!2d-103.44754388656755!3d20.694364413158434!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8428ae4e32049e9d%3A0xc06e000000000000!2sZapopan%2C%20Jal.!5e0!3m2!1ses-419!2smx!4v1710000000000!5m2!1ses-419!2smx"
+        width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+    </div>
+  </section>
+
+  <div id="temp-selector"
+    class="fixed inset-0 bg-[#452710]/80 z-[100] hidden items-center justify-center p-6 backdrop-blur-md">
+    <div class="bg-[#FDFBF7] max-w-2xl w-full rounded-[3rem] p-10 relative text-center">
+      <button onclick="closeTempSelector()"
+        class="absolute top-6 right-8 text-4xl text-[#D4A373] hover:text-[#452710]">×</button>
+      <h2 class="text-3xl font-black italic mb-2">¿Cómo prefieres tu café?</h2>
+      <p class="text-stone-500 mb-10 text-sm">Selecciona una categoría para explorar el menú</p>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div onclick="openModal('calientes')"
+          class="temp-option p-8 rounded-[2rem] bg-stone-50 flex flex-col items-center group">
+          <div
+            class="w-20 h-20 bg-orange-100 rounded-full flex items-center justify-center mb-4 text-4xl text-orange-600 group-hover:bg-orange-600 group-hover:text-white transition-all">
+            <i class='bx bxs-hot'></i>
+          </div>
+          <span class="font-bold text-xl uppercase tracking-widest text-[#452710]">Calientes</span>
+          <p class="text-xs text-stone-400 mt-2">Espressos, Lattes y Métodos.</p>
+        </div>
+        <div onclick="openModal('frias')"
+          class="temp-option p-8 rounded-[2rem] bg-stone-50 flex flex-col items-center group">
+          <div
+            class="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mb-4 text-4xl text-blue-500 group-hover:bg-blue-500 group-hover:text-white transition-all">
+            <i class='bx bx-fridge'></i>
+          </div>
+          <span class="font-bold text-xl uppercase tracking-widest text-[#452710]">Frías</span>
+          <p class="text-xs text-stone-400 mt-2">Frappés, Batidos y Malteadas.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="category-modal"
+    class="fixed inset-0 bg-[#452710]/95 z-[110] hidden items-center justify-center p-6 backdrop-blur-sm">
+    <div class="max-w-6xl w-full text-center">
+      <h3 id="modal-title" class="text-5xl font-black italic text-white mb-4 uppercase">Categoría</h3>
+      <div id="cards-container" class="flex flex-wrap justify-center gap-10 mb-16 max-h-[60vh] overflow-y-auto p-4">
+      </div>
+      <div class="flex flex-col md:flex-row justify-center items-center gap-8">
+        <button onclick="backToSelector()"
+          class="text-stone-400 font-bold hover:text-white transition-colors underline decoration-[#D4A373]">Volver al
+          selector</button>
+        <a href="proyecto1.html"
+          class="bg-white text-[#452710] px-12 py-4 rounded-full font-black hover:bg-[#D4A373] hover:text-white transition-all shadow-xl uppercase tracking-widest text-sm text-center">Ver
+          Menú Completo</a>
+      </div>
+    </div>
+  </div>
+
+  <footer class="bg-white py-20 px-[9%] border-t border-stone-100">
+    <div class="grid md:grid-cols-3 gap-12 items-center text-[#452710]">
+      <div class="text-center md:text-left">
+        <h4 class="text-2xl font-black italic">AAM <span class="text-[#D4A373]">DESIGN</span></h4>
+        <p class="text-stone-400 text-[10px] mt-2 uppercase tracking-[0.3em]">Soluciones Digitales Gastronómicas</p>
+      </div>
+      <div class="flex justify-center gap-8 text-2xl text-[#D4A373]">
+        <i class='bx bxl-instagram-alt cursor-pointer hover:text-[#452710] transition-colors'></i>
+        <i class='bx bxl-facebook-square cursor-pointer hover:text-[#452710] transition-colors'></i>
+        <i class='bx bxl-whatsapp cursor-pointer hover:text-[#452710] transition-colors'></i>
+      </div>
+      <div class="text-center md:text-right text-stone-400 text-xs font-medium">
+        © 2026 Andrea Arcelia Andrade Mejía<br>Desarrollo Web & Estrategia Digital
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const cafeData = {
+      calientes: [
+        { name: 'Espresso', img: 'https://images.unsplash.com/photo-1510707577719-5d6833039729?auto=format&fit=crop&q=80&w=300' },
+        { name: 'Capuccino', img: 'https://images.unsplash.com/photo-1572442388796-11668a67e53d?auto=format&fit=crop&q=80&w=300' },
+        { name: 'Latte Art', img: 'https://images.unsplash.com/photo-1541167760496-162955ed8a9f?auto=format&fit=crop&q=80&w=300' },
+        { name: 'Métodos V60', img: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&q=80&w=300' },
+        { name: 'Té Matcha', img: 'https://images.unsplash.com/photo-1515823064-d6e0c04616a7?auto=format&fit=crop&q=80&w=300' }
+      ],
+      frias: [
+        { name: 'Frappés', img: 'https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&q=80&w=300' },
+        { name: 'Batidos', img: 'https://images.unsplash.com/photo-1553530666-ba11a7da3888?auto=format&fit=crop&q=80&w=300' },
+        { name: 'Malteadas', img: 'https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&q=80&w=300' },
+        { name: 'Cold Brew', img: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&q=80&w=300' },
+        { name: 'Iced Latte', img: 'https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&q=80&w=300' }
+      ],
+      reposteria: [
+        { name: 'Croissant', img: 'https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&q=80&w=300' },
+        { name: 'Cakes', img: 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&q=80&w=300' },
+        { name: 'Cookies', img: 'https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&q=80&w=300' }
+      ]
+    };
+
+    function openTempSelector() { document.getElementById('temp-selector').classList.replace('hidden', 'flex'); }
+    function closeTempSelector() { document.getElementById('temp-selector').classList.replace('flex', 'hidden'); }
+    function openModal(type) {
+      closeTempSelector();
+      const modal = document.getElementById('category-modal');
+      const container = document.getElementById('cards-container');
+      const title = document.getElementById('modal-title');
+      title.innerText = type === 'calientes' ? 'Barra Caliente' : type === 'frias' ? 'Barra Fría' : 'Repostería';
+      container.innerHTML = '';
+      cafeData[type].forEach(item => {
+        container.innerHTML += `<div class="flex flex-col items-center gap-4"><div class="circular-card"><img src="${item.img}" alt="${item.name}"></div><span class="text-white text-[11px] font-black uppercase tracking-[0.2em]">${item.name}</span></div>`;
+      });
+      modal.classList.replace('hidden', 'flex');
+    }
+    function closeModal() { document.getElementById('category-modal').classList.replace('flex', 'hidden'); }
+    function backToSelector() { closeModal(); openTempSelector(); }
+  </script>
+</body>
+
+</html>

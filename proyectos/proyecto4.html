@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catálogo de Alta Conversión | AAM Design</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #000;
+    }
+
+    /* Tarjeta Minimalista Blanca */
+    .minimal-card {
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .minimal-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(6, 182, 212, 0.15);
+    }
+  </style>
+</head>
+
+<body class="text-white selection:bg-cyan-400 selection:text-black">
+
+  <nav
+    class="fixed top-0 w-full z-50 px-[9%] py-6 flex justify-between items-center bg-black/80 backdrop-blur-lg border-b border-white/5">
+    <a href="../index.html" class="flex items-center gap-2 text-slate-400 hover:text-white transition-colors group">
+      <i class='bx bx-left-arrow-alt text-2xl group-hover:-translate-x-1 transition-transform'></i>
+      <span class="text-[10px] uppercase tracking-[0.3em] font-bold">Volver al Inicio</span>
+    </a>
+    <h4 class="text-xl font-black italic tracking-tighter">AAM <span class="text-cyan-400">DESIGN</span></h4>
+  </nav>
+
+  <main class="min-h-screen flex flex-col items-center justify-center px-6 pt-32 pb-20">
+
+    <header class="text-center mb-20">
+      <span class="text-cyan-400 text-[10px] font-bold uppercase tracking-[0.6em] mb-4 block">Soluciones
+        Digitales</span>
+      <h1 class="text-5xl md:text-7xl font-800 italic mb-6 tracking-tight">EXPERIENCIA <span
+          class="text-white">VISUAL</span></h1>
+      <p class="text-slate-500 max-w-2xl mx-auto text-sm md:text-base leading-relaxed font-light">
+        Selecciona el modelo de negocio para explorar la arquitectura de conversión.
+      </p>
+    </header>
+
+    <div class="grid md:grid-cols-2 gap-10 w-full max-w-6xl">
+
+      <div class="group minimal-card p-12 rounded-[2.5rem] relative overflow-hidden flex flex-col items-start">
+        <i
+          class='bx bx-closet absolute -right-10 -bottom-10 text-slate-100 text-[15rem] transition-transform group-hover:scale-110 duration-700'></i>
+
+        <div class="relative z-10 w-full">
+          <div class="w-14 h-14 bg-black rounded-2xl flex items-center justify-center mb-8 shadow-lg">
+            <i class='bx bx-closet text-2xl text-cyan-400'></i>
+          </div>
+
+          <h3 class="text-3xl font-800 text-black italic mb-4">Fashion <span class="text-cyan-600">Advisor</span></h3>
+          <p class="text-slate-600 text-sm mb-10 leading-relaxed font-medium">
+            Arquitectura visual de alta gama. Enfoque en estética, tendencias y curaduría de imagen para marcas
+            personales de lujo.
+          </p>
+
+          <a href="demo-moda.html"
+            class="inline-flex items-center gap-3 bg-black text-white px-8 py-4 rounded-2xl font-bold hover:bg-cyan-500 hover:scale-105 transition-all shadow-xl">
+            Explorar Demo
+            <i class='bx bx-right-arrow-alt text-xl'></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="group minimal-card p-12 rounded-[2.5rem] relative overflow-hidden flex flex-col items-start">
+        <i
+          class='bx bx-briefcase-alt-2 absolute -right-10 -bottom-10 text-slate-100 text-[15rem] transition-transform group-hover:scale-110 duration-700'></i>
+
+        <div class="relative z-10 w-full">
+          <div class="w-14 h-14 bg-black rounded-2xl flex items-center justify-center mb-8 shadow-lg">
+            <i class='bx bx-briefcase-alt-2 text-2xl text-cyan-400'></i>
+          </div>
+
+          <h3 class="text-3xl font-800 text-black italic mb-4">Legal <span class="text-cyan-600">Consultant</span></h3>
+          <p class="text-slate-600 text-sm mb-10 leading-relaxed font-medium">
+            Diseño corporativo de autoridad. Estructura sólida enfocada en la captación de clientes y seguridad jurídica
+            profesional.
+          </p>
+
+          <a href="demo-legal.html"
+            class="inline-flex items-center gap-3 bg-black text-white px-8 py-4 rounded-2xl font-bold hover:bg-cyan-500 hover:scale-105 transition-all shadow-xl">
+            Explorar Demo
+            <i class='bx bx-right-arrow-alt text-xl'></i>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <footer class="mt-24 text-center">
+      <p class="text-slate-600 text-[9px] uppercase tracking-[0.5em] font-medium">
+        AAM Desing Solutions Web 2026 @ copyright | derechos reservados
+      </p>
+    </footer>
+  </main>
+
+</body>
+
+</html>

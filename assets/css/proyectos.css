@@ -1,0 +1,105 @@
+body {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+.project {
+	position: relative;
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	color: white;
+}
+
+.project img {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	z-index: -1;
+}
+
+.projects__buttons {
+	display: flex;
+	justify-content: center;
+	gap: 10px; /* Aumenta el espacio entre los botones */
+	margin-top: 20px; /* Aumenta el margen superior */
+	flex-wrap: wrap;
+}
+
+.projects__buttons .btn {
+	padding: 8px 16px; /* Ajusta el padding */
+	font-size: 16px; /* Ajusta el tamaño de la fuente */
+	color: white;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.projects__buttons .ver-demo {
+	background-color: #181bdf;
+}
+
+.projects__buttons .ver-codigo {
+	background-color: #2a9adb;
+}
+
+.text-content .regresar {
+	margin-top: 20px;
+	background-color: rgb(34, 22, 22);
+	color: white;
+	padding: 10px 20px;
+	border-radius: 5px;
+	text-decoration: none;
+	border: none;
+	cursor: pointer;
+	display: block;
+	width: fit-content;
+	margin: 20px auto 0;
+}
+
+.project .text-content {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	opacity: 1;
+	padding: 20px;
+	box-sizing: border-box;
+	z-index: 1;
+	background-color: rgba(82, 74, 206, 0.952);
+	border-radius: 10px;
+	width: 80%;
+	max-width: 600px;
+	display: flex; /* Agregado para alinear los botones dentro del recuadro */
+	flex-direction: column; /* Alinea los elementos verticalmente */
+	align-items: center; /* Centra los elementos horizontalmente */
+}
+
+.project .text-content.animate {
+	animation: fadeIn 1s ease-in-out forwards;
+}
+
+.project .text-content h4 {
+	font-family: 'Arial Black', Arial, Helvetica, sans-serif;
+	font-size: 2.1rem;
+	margin-bottom: 0.8rem;
+}
+
+@keyframes fadeIn {
+	0% {
+		opacity: 0;
+		transform: translate(-50%, -30%);
+	}
+	100% {
+		opacity: 1;
+		transform: translate(-50%, -50%);
+	}
+}
