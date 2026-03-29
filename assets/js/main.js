@@ -4,6 +4,7 @@ import scroll from './components/scroll.js';
 import resetToHome from './helpers/reload_page.js';
 import sendEmail from './helpers/send_form.js';
 import updateCopyrightYear from './helpers/date_updater.js';
+import initServicesAnimation from './components/services_animation.js';
 
 loader();
 
@@ -16,3 +17,5 @@ resetToHome();
 sendEmail();
 
 updateCopyrightYear();
+
+initServicesAnimation();

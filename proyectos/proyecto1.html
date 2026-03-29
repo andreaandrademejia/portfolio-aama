@@ -4,9 +4,33 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AAM Gourmet | Menú Digital Completo</title>
+  <title>AAM Gourmet | Menú Digital Profesional Demo</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            orange: {
+              50: '#fff7ed',
+              100: '#ffedd5',
+              500: '#f97316',
+              600: '#ea580c',
+            },
+            stone: {
+              50: '#fafaf9',
+              100: '#f5f5f4',
+              900: '#1c1917',
+            }
+          },
+          fontFamily: {
+            sans: ['SF Pro Display', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', '"Helvetica Neue"', 'Arial', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
   <style>
     .no-scrollbar::-webkit-scrollbar {
       display: none;
@@ -22,6 +46,22 @@
       background-color: #fff7ed !important;
     }
 
+    .category-btn.active {
+      background-color: #ea580c;
+      color: white;
+      border-color: #ea580c;
+    }
+
+    .product-card.hidden {
+      display: none;
+    }
+
+    .side-menu-link.active {
+      color: #ea580c;
+      background-color: #fff7ed;
+      border-right: 4px solid #ea580c;
+    }
+
     @keyframes slideUp {
       from {
         transform: translateY(100%);
@@ -35,332 +75,956 @@
     .animate-up {
       animation: slideUp 0.3s ease-out;
     }
+
+    body {
+      font-feature-settings: "ss01", "ss03", "cv01";
+    }
+
+    /* Responsive Side Menu visibility */
+    @media (min-width: 1024px) {
+      #side-menu {
+        display: flex !important;
+      }
+
+      #main-content {
+        margin-left: 20rem;
+      }
+
+      #mobile-header {
+        display: none !important;
+      }
+
+      #cart-bar {
+        display: none !important;
+      }
+    }
   </style>
 </head>
 
-<body class="bg-stone-50 font-sans pb-32">
+<body class="bg-stone-50 text-stone-900 pb-32 lg:pb-0">
 
-  <header class="bg-white/90 backdrop-blur-md shadow-sm sticky top-0 z-50 px-6 py-4 flex justify-between items-center">
+  <header id="mobile-header"
+    class="bg-white/95 backdrop-blur-sm shadow-sm sticky top-0 z-50 px-6 py-4 flex justify-between items-center lg:hidden">
     <div class="flex items-center gap-4">
-      <a href="index.html"
-        class="flex items-center justify-center w-10 h-10 rounded-full bg-gray-100 text-gray-600 hover:bg-orange-600">
+      <a href="#"
+        class="flex items-center justify-center w-10 h-10 rounded-full bg-gray-100 text-gray-600 hover:bg-orange-600 hover:text-white transform transition-all">
         <i class='bx bx-arrow-back text-xl'></i>
       </a>
       <div>
-        <h1 class="text-xl font-black text-orange-600 leading-none italic">AAM GOURMET</h1>
+        <h1 class="text-xl font-black text-orange-600 leading-none italic tracking-tight">AAM GOURMET</h1>
         <p class="text-[9px] text-gray-400 tracking-[0.3em] uppercase">Menú Interactivo</p>
       </div>
     </div>
+    <button onclick="toggleSideMenu()"
+      class="text-2xl text-gray-600 w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 lg:hidden">
+      <i class='bx bx-menu'></i>
+    </button>
   </header>
 
-  <main class="max-w-md mx-auto p-4 space-y-12">
+  <div class="flex">
+    <nav id="side-menu"
+      class="fixed top-0 left-0 bottom-0 w-80 bg-white shadow-xl z-[100] flex-col justify-between py-10 px-8 border-r border-gray-100 hidden lg:flex">
+      <div>
+        <div class="mb-12">
+          <h1 class="text-3xl font-black text-orange-600 leading-none italic tracking-tight">AAM GOURMET</h1>
+          <p class="text-xs text-gray-400 tracking-[0.3em] uppercase mt-1">Menú Interactivo</p>
+        </div>
 
-    <section>
-      <h2 class="text-xl font-black text-gray-800 mb-6 border-l-4 border-orange-500 pl-3 uppercase italic">Platos
-        Fuertes</h2>
-      <div class="grid gap-6">
-        <div
-          onclick="openProduct('Pizza Artesanal', 195, 'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=500', 'Masa madre 48h. Elige: Vegetariana, Italiana o Pepperoni.')"
-          class="bg-white rounded-[2rem] overflow-hidden shadow-sm border border-gray-100 cursor-pointer">
-          <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=500"
-            class="w-full h-40 object-cover">
-          <div class="p-4 flex justify-between items-center">
-            <div>
-              <h3 class="font-bold text-gray-800">Pizza de la Casa</h3>
-              <p class="text-gray-400 text-xs">Artesanal</p>
+        <div class="space-y-3">
+          <a href="#" onclick="showView('menu'); return false;" id="link-menu"
+            class="side-menu-link flex items-center gap-4 px-5 py-4 rounded-xl text-gray-700 hover:bg-orange-50 font-semibold active">
+            <i class='bx bx-restaurant text-2xl'></i>
+            <span>Explorar Menú</span>
+          </a>
+          <a href="#" onclick="showView('order'); return false;" id="link-order"
+            class="side-menu-link flex items-center gap-4 px-5 py-4 rounded-xl text-gray-700 hover:bg-orange-50 font-semibold relative">
+            <i class='bx bx-list-check text-2xl'></i>
+            <span>Mi Pedido Confirmado</span>
+            <span id="order-count-badge"
+              class="absolute top-4 right-5 bg-orange-600 text-white text-[10px] font-black w-5 h-5 flex items-center justify-center rounded-full hidden">0</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="bg-stone-50 p-6 rounded-3xl border border-gray-100 mt-10">
+        <div class="flex items-center justify-between mb-5">
+          <div class="flex items-center gap-3">
+            <i class='bx bx-shopping-bag text-3xl text-orange-600'></i>
+            <span class="font-bold text-lg">Tu Carrito</span>
+          </div>
+          <span id="cart-count-side" class="bg-white px-3 py-1 rounded-full text-xs font-bold shadow-inner">0
+            items</span>
+        </div>
+        <div class="flex justify-between items-center mb-6">
+          <span class="text-gray-500 font-medium">Subtotal:</span>
+          <span id="cart-total-side" class="font-black text-2xl text-stone-900">$0</span>
+        </div>
+        <button onclick="confirmOrderFromCart()"
+          class="w-full bg-stone-900 text-white font-bold py-4 rounded-xl shadow-lg hover:bg-stone-800 transform transition-all flex justify-center items-center gap-2">
+          Completar mi Pedido
+          <i class='bx bx-right-arrow-alt text-xl'></i>
+        </button>
+      </div>
+
+      <button onclick="toggleSideMenu()" class="absolute top-6 right-6 text-2xl text-gray-400 lg:hidden">
+        <i class='bx bx-x'></i>
+      </button>
+    </nav>
+    <div id="side-menu-overlay" onclick="toggleSideMenu()" class="fixed inset-0 bg-black/50 z-[90] hidden lg:hidden">
+    </div>
+
+
+    <main id="main-content" class="flex-1 max-w-7xl mx-auto p-4 md:p-10 w-full transition-all duration-300">
+
+      <div id="view-menu" class="space-y-12">
+
+        <section id="categories" class="pt-6 lg:pt-0">
+          <div class="flex gap-3 overflow-x-auto no-scrollbar pb-2 -mx-4 px-4 md:-mx-0 md:px-0">
+            <button onclick="filterCategory('all', this)"
+              class="category-btn active min-w-[120px] flex flex-col items-center justify-center bg-white p-6 rounded-3xl shadow-sm border border-gray-100 text-center font-bold text-gray-700 transform transition-all hover:scale-105">
+              <i class='bx bx-grid-alt text-3xl mb-3 text-orange-500'></i>
+              <span class="text-sm">Todo</span>
+            </button>
+            <button onclick="filterCategory('plato fuerte', this)"
+              class="category-btn min-w-[120px] flex flex-col items-center justify-center bg-white p-6 rounded-3xl shadow-sm border border-gray-100 text-center font-bold text-gray-700 transform transition-all hover:scale-105">
+              <i class='bx bx-dish text-3xl mb-3 text-orange-500'></i>
+              <span class="text-sm">Plato Fuerte</span>
+            </button>
+            <button onclick="filterCategory('sopa', this)"
+              class="category-btn min-w-[120px] flex flex-col items-center justify-center bg-white p-6 rounded-3xl shadow-sm border border-gray-100 text-center font-bold text-gray-700 transform transition-all hover:scale-105">
+              <i class='bx bx-bowl-hot text-3xl mb-3 text-orange-500'></i>
+              <span class="text-sm">Sopas</span>
+            </button>
+            <button onclick="filterCategory('pasta', this)"
+              class="category-btn min-w-[120px] flex flex-col items-center justify-center bg-white p-6 rounded-3xl shadow-sm border border-gray-100 text-center font-bold text-gray-700 transform transition-all hover:scale-105">
+              <i class='bx bx-bowl-rice text-3xl mb-3 text-orange-500'></i>
+              <span class="text-sm">Pastas</span>
+            </button>
+            <button onclick="filterCategory('postre', this)"
+              class="category-btn min-w-[120px] flex flex-col items-center justify-center bg-white p-6 rounded-3xl shadow-sm border border-gray-100 text-center font-bold text-gray-700 transform transition-all hover:scale-105">
+              <i class='bx bx-cake text-3xl mb-3 text-orange-500'></i>
+              <span class="text-sm">Postres</span>
+            </button>
+            <button onclick="filterCategory('bebida', this)"
+              class="category-btn min-w-[120px] flex flex-col items-center justify-center bg-white p-6 rounded-3xl shadow-sm border border-gray-100 text-center font-bold text-gray-700 transform transition-all hover:scale-105">
+              <i class='bx bx-drink text-3xl mb-3 text-orange-500'></i>
+              <span class="text-sm">Bebidas</span>
+            </button>
+          </div>
+        </section>
+
+        <section id="search-section"
+          class="bg-white p-6 rounded-3xl shadow-sm border border-gray-100 flex flex-col md:flex-row gap-4 items-center">
+          <div class="relative flex-1 w-full">
+            <i class='bx bx-search absolute left-5 top-1/2 -translate-y-1/2 text-2xl text-gray-400'></i>
+            <input type="text" id="search-input" onkeyup="searchProducts()" placeholder="Buscar pizza, alitas, pasta..."
+              class="w-full bg-stone-50 border border-gray-100 rounded-full py-4 pl-14 pr-6 text-lg focus:ring-2 focus:ring-orange-200 outline-none transition-all">
+          </div>
+          <select id="sort-select" onchange="sortProducts()"
+            class="w-full md:w-48 bg-stone-50 border border-gray-100 rounded-full py-4 px-6 text-gray-600 outline-none focus:ring-2 focus:ring-orange-200 transition-all cursor-pointer">
+            <option value="default">Ordenar por</option>
+            <option value="price-low">Precio: Bajo a Alto</option>
+            <option value="price-high">Precio: Alto a Bajo</option>
+            <option value="name">Nombre: A-Z</option>
+          </select>
+        </section>
+
+        <section id="hero-image" class="w-full overflow-hidden rounded-[2.5rem] shadow-lg border-4 border-white">
+          <img src="/images/Gemini_Generated_Image_k75r8rk75r8rk75r.png" alt="AAM Gourmet Hero Cover"
+            class="w-full h-auto object-cover transform hover:scale-105 transition-transform duration-500">
+        </section>
+
+        <section id="specialties">
+          <div class="flex items-center gap-4 mb-8">
+            <div class="w-12 h-12 bg-orange-100 text-orange-600 rounded-2xl flex items-center justify-center text-3xl">
+              <i class='bx bxs-star'></i>
             </div>
-            <span class="text-orange-600 font-black">$195</span>
+            <h2 class="text-3xl font-black text-gray-800 uppercase italic tracking-tighter">Especialidades de la Casa
+            </h2>
           </div>
-        </div>
-        <div
-          onclick="openProduct('Hamburguesa Pro', 155, 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=500', '200g carne Angus, pan brioche y vegetales frescos.')"
-          class="bg-white rounded-[2rem] overflow-hidden shadow-sm border border-gray-100 cursor-pointer">
-          <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=500"
-            class="w-full h-40 object-cover">
-          <div class="p-4 flex justify-between items-center">
-            <div>
-              <h3 class="font-bold text-gray-800">Hamburguesa Pro</h3>
-              <p class="text-gray-400 text-xs">Angus Beef</p>
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div
+              onclick="openProduct('Hamburguesa Pro', 155, 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600', '200g carne Angus, pan brioche y vegetales frescos.', 'plato fuerte')"
+              class="bg-white rounded-[2rem] overflow-hidden shadow-sm border border-gray-100 cursor-pointer group transform transition-all hover:-translate-y-2 hover:shadow-xl">
+              <div class="relative h-60 overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600"
+                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                <span
+                  class="absolute top-4 right-4 bg-orange-500 text-white text-[10px] font-black px-4 py-1.5 rounded-full uppercase tracking-widest">Recomendado</span>
+              </div>
+              <div class="p-6 flex justify-between items-start">
+                <div>
+                  <h3 class="font-bold text-xl text-gray-800">Hamburguesa Pro</h3>
+                  <p class="text-gray-400 text-sm mt-1">Angus Beef</p>
+                </div>
+                <span class="text-orange-600 font-black text-2xl tracking-tight">$155</span>
+              </div>
             </div>
-            <span class="text-orange-600 font-black">$155</span>
-          </div>
-        </div>
-        <div
-          onclick="openProduct('Alitas Crujientes', 140, 'https://images.unsplash.com/photo-1567620832903-9fc6debc209f?w=500', '10 piezas bañadas en BBQ o Buffalo.')"
-          class="bg-white rounded-[2rem] overflow-hidden shadow-sm border border-gray-100 cursor-pointer">
-          <img src="https://images.unsplash.com/photo-1567620832903-9fc6debc209f?w=500"
-            class="w-full h-40 object-cover">
-          <div class="p-4 flex justify-between items-center">
-            <div>
-              <h3 class="font-bold text-gray-800">Alitas AAM</h3>
-              <p class="text-gray-400 text-xs">BBQ / Buffalo</p>
+
+            <div
+              onclick="openProduct('Hot Dog Jumbo', 85, '/images/diana-bondarenko-b6YOdB0_Vw4-unsplash.jpg', 'Salchicha jumbo, tocino y cebolla caramelizada.', 'plato fuerte')"
+              class="bg-white rounded-[2rem] overflow-hidden shadow-sm border border-gray-100 cursor-pointer group transform transition-all hover:-translate-y-2 hover:shadow-xl">
+              <div class="relative h-60 overflow-hidden">
+                <img src="/images/diana-bondarenko-b6YOdB0_Vw4-unsplash.jpg"
+                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                <span
+                  class="absolute top-4 right-4 bg-orange-500 text-white text-[10px] font-black px-4 py-1.5 rounded-full uppercase tracking-widest">Recomendado</span>
+              </div>
+              <div class="p-6 flex justify-between items-start">
+                <div>
+                  <h3 class="font-bold text-xl text-gray-800">Hot Dog Jumbo</h3>
+                  <p class="text-gray-400 text-sm mt-1">Estilo NY</p>
+                </div>
+                <span class="text-orange-600 font-black text-2xl tracking-tight">$85</span>
+              </div>
             </div>
-            <span class="text-orange-600 font-black">$140</span>
           </div>
-        </div>
-        <div
-          onclick="openProduct('Hot Dog Jumbo', 85, 'https://images.unsplash.com/photo-1541232399607-42da0974b787?w=500', 'Salchicha jumbo, tocino y cebolla caramelizada.')"
-          class="bg-white rounded-[2rem] overflow-hidden shadow-sm border border-gray-100 cursor-pointer">
-          <img src="https://images.unsplash.com/photo-1541232399607-42da0974b787?w=500"
-            class="w-full h-40 object-cover">
-          <div class="p-4 flex justify-between items-center">
-            <div>
-              <h3 class="font-bold text-gray-800">Hot Dog Jumbo</h3>
-              <p class="text-gray-400 text-xs">Estilo NY</p>
+        </section>
+
+        <section id="full-menu">
+          <div class="mb-10 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+            <h2 id="current-category-title"
+              class="text-3xl font-black text-gray-800 uppercase italic tracking-tighter border-l-8 border-orange-500 pl-4">
+              Todos los Platillos</h2>
+            <p id="results-count"
+              class="text-gray-500 font-medium bg-white px-5 py-2 rounded-full border border-gray-100 shadow-sm"></p>
+          </div>
+
+          <div id="product-grid" class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+
+            <div data-category="plato fuerte" data-price="195" data-name="Pizza Artesanal"
+              onclick="openProduct('Pizza Artesanal', 195, 'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=500', 'Masa madre 48h. Elige: Vegetariana, Italiana o Pepperoni.', 'plato fuerte')"
+              class="product-card bg-white rounded-[2rem] overflow-hidden shadow-sm border border-gray-100 cursor-pointer group transform transition-all hover:shadow-lg">
+              <div class="relative h-40 overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=500"
+                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+              </div>
+              <div class="p-5 flex justify-between items-center">
+                <div>
+                  <h3 class="font-bold text-gray-800">Pizza de la Casa</h3>
+                  <p class="text-gray-400 text-xs">Artesanal</p>
+                </div>
+                <span class="text-orange-600 font-black text-xl tracking-tight">$195</span>
+              </div>
             </div>
-            <span class="text-orange-600 font-black">$85</span>
+
+            <div data-category="plato fuerte" data-price="155" data-name="Hamburguesa Pro"
+              onclick="openProduct('Hamburguesa Pro', 155, 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=500', '200g carne Angus, pan brioche y vegetales frescos.', 'plato fuerte')"
+              class="product-card bg-white rounded-[2rem] overflow-hidden shadow-sm border border-gray-100 cursor-pointer group transform transition-all hover:shadow-lg">
+              <div class="relative h-40 overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=500"
+                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+              </div>
+              <div class="p-5 flex justify-between items-center">
+                <div>
+                  <h3 class="font-bold text-gray-800">Hamburguesa Pro</h3>
+                  <p class="text-gray-400 text-xs">Angus Beef</p>
+                </div>
+                <span class="text-orange-600 font-black text-xl tracking-tight">$155</span>
+              </div>
+            </div>
+
+            <div data-category="plato fuerte" data-price="140" data-name="Alitas AAM"
+              onclick="openProduct('Alitas Crujientes', 140, 'https://images.unsplash.com/photo-1567620832903-9fc6debc209f?w=500', '10 piezas bañadas en BBQ o Buffalo.', 'plato fuerte')"
+              class="product-card bg-white rounded-[2rem] overflow-hidden shadow-sm border border-gray-100 cursor-pointer group transform transition-all hover:shadow-lg">
+              <div class="relative h-40 overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1567620832903-9fc6debc209f?w=500"
+                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+              </div>
+              <div class="p-5 flex justify-between items-center">
+                <div>
+                  <h3 class="font-bold text-gray-800">Alitas AAM</h3>
+                  <p class="text-gray-400 text-xs">BBQ / Buffalo</p>
+                </div>
+                <span class="text-orange-600 font-black text-xl tracking-tight">$140</span>
+              </div>
+            </div>
+
+            <div data-category="plato fuerte" data-price="85" data-name="Hot Dog Jumbo"
+              onclick="openProduct('Hot Dog Jumbo', 85, 'https://images.unsplash.com/photo-1619604176272-9b626e9596c0?w=500', 'Salchicha jumbo, tocino y cebolla caramelizada.', 'plato fuerte')"
+              class="product-card bg-white rounded-[2rem] overflow-hidden shadow-sm border border-gray-100 cursor-pointer group transform transition-all hover:shadow-lg">
+              <div class="relative h-40 overflow-hidden">
+                <img src="/images/diana-bondarenko-b6YOdB0_Vw4-unsplash.jpg"
+                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+              </div>
+              <div class="p-5 flex justify-between items-center">
+                <div>
+                  <h3 class="font-bold text-gray-800">Hot Dog Jumbo</h3>
+                  <p class="text-gray-400 text-xs">Estilo NY</p>
+                </div>
+                <span class="text-orange-600 font-black text-xl tracking-tight">$85</span>
+              </div>
+            </div>
+
+            <div data-category="pasta" data-price="165" data-name="Estilo Alfredo"
+              onclick="openProduct('Pasta Alfredo', 165, 'https://images.unsplash.com/photo-1645112481338-331499700320?w=500', 'Fettuccine en crema de parmesano y mantequilla con pollo grill.', 'pasta')"
+              class="product-card bg-white rounded-[2rem] overflow-hidden shadow-sm border border-gray-100 cursor-pointer group transform transition-all hover:shadow-lg">
+              <div class="relative h-40 overflow-hidden">
+                <img src="/images/engin-akyurt-Jrvcg9My0B4-unsplash.jpg"
+                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+              </div>
+              <div class="p-5 flex justify-between items-center">
+                <div>
+                  <h3 class="font-bold text-gray-800">Estilo Alfredo</h3>
+                  <p class="text-gray-400 text-xs">Fettuccine</p>
+                </div>
+                <span class="text-orange-600 font-black text-xl tracking-tight">$165</span>
+              </div>
+            </div>
+
+            <div data-category="pasta" data-price="155" data-name="Boloñesa Real"
+              onclick="openProduct('Pasta Boloñesa', 155, 'https://images.unsplash.com/photo-1598866539627-9e692f1a6377?w=500', 'Receta tradicional con carne de res y pomodoro casero.', 'pasta')"
+              class="product-card bg-white rounded-[2rem] overflow-hidden shadow-sm border border-gray-100 cursor-pointer group transform transition-all hover:shadow-lg">
+              <div class="relative h-40 overflow-hidden">
+                <img src="/images/stefan-schauberger-Zy3H2bIF3Vs-unsplash.jpg"
+                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+              </div>
+              <div class="p-5 flex justify-between items-center">
+                <div>
+                  <h3 class="font-bold text-gray-800">Boloñesa Real</h3>
+                  <p class="text-gray-400 text-xs">Receta Tradicional</p>
+                </div>
+                <span class="text-orange-600 font-black text-xl tracking-tight">$155</span>
+              </div>
+            </div>
+
+            <div data-category="pasta" data-price="150" data-name="Pesto Genovés"
+              onclick="openProduct('Pasta al Pesto', 150, 'https://images.unsplash.com/photo-1473093226795-af9932fe5856?w=500', 'Albahaca fresca, piñones y aceite de oliva extra virgen.', 'pasta')"
+              class="product-card bg-white rounded-[2rem] overflow-hidden shadow-sm border border-gray-100 cursor-pointer group transform transition-all hover:shadow-lg">
+              <div class="relative h-40 overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1473093226795-af9932fe5856?w=500"
+                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+              </div>
+              <div class="p-5 flex justify-between items-center">
+                <div>
+                  <h3 class="font-bold text-gray-800">Pesto Genovés</h3>
+                  <p class="text-gray-400 text-xs">Albahaca Fresca</p>
+                </div>
+                <span class="text-orange-600 font-black text-xl tracking-tight">$150</span>
+              </div>
+            </div>
+
+            <div data-category="sopa" data-price="85" data-name="Tomate"
+              onclick="openProduct('Sopa de Tomate', 85, 'https://images.unsplash.com/photo-1547592115-f996c990264b?w=600', 'Tomate rostizado con albahaca.', 'sopa')"
+              class="product-card bg-white rounded-[2rem] overflow-hidden shadow-sm border border-gray-100 cursor-pointer group transform transition-all hover:shadow-lg">
+              <div class="relative h-40 overflow-hidden">
+                <img src="/images/josie-rees-c_okLSs8dww-unsplash.jpg"
+                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+              </div>
+              <div class="p-5 flex justify-between items-center">
+                <div>
+                  <h3 class="font-bold text-gray-800">Tomate</h3>
+                  <p class="text-gray-400 text-xs">Rostizado</p>
+                </div>
+                <span class="text-orange-600 font-black text-xl tracking-tight">$85</span>
+              </div>
+            </div>
+
+            <div data-category="sopa" data-price="85" data-name="Elote Tierno"
+              onclick="openProduct('Crema Elote', 85, 'https://images.unsplash.com/photo-1603105037880-880cd4edfb0d?w=600', 'Elote tierno con chile quebrado.', 'sopa')"
+              class="product-card bg-white rounded-[2rem] overflow-hidden shadow-sm border border-gray-100 cursor-pointer group transform transition-all hover:shadow-lg">
+              <div class="relative h-40 overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1603105037880-880cd4edfb0d?w=600"
+                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+              </div>
+              <div class="p-5 flex justify-between items-center">
+                <div>
+                  <h3 class="font-bold text-gray-800">Elote Tierno</h3>
+                  <p class="text-gray-400 text-xs">Crema</p>
+                </div>
+                <span class="text-orange-600 font-black text-xl tracking-tight">$85</span>
+              </div>
+            </div>
+
+            <div data-category="postre" data-price="110" data-name="Tiramisú"
+              onclick="openProduct('Tiramisú', 110, 'https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?w=600', 'Café espresso, mascarpone y cacao.', 'postre')"
+              class="product-card bg-white rounded-[2rem] overflow-hidden shadow-sm border border-gray-100 cursor-pointer group transform transition-all hover:shadow-lg">
+              <div class="relative h-40 overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?w=600"
+                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+              </div>
+              <div class="p-5 flex justify-between items-center">
+                <div>
+                  <h3 class="font-bold text-gray-800">Tiramisú</h3>
+                  <p class="text-gray-400 text-xs">Clásico Italiano</p>
+                </div>
+                <span class="text-orange-600 font-black text-xl tracking-tight">$110</span>
+              </div>
+            </div>
+
+            <div data-category="postre" data-price="95" data-name="Helado Frito"
+              onclick="openProduct('Helado Frito', 95, 'https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=600', 'Vainilla crujiente con salsa de chocolate.', 'postre')"
+              class="product-card bg-white rounded-[2rem] overflow-hidden shadow-sm border border-gray-100 cursor-pointer group transform transition-all hover:shadow-lg">
+              <div class="relative h-40 overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=600"
+                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+              </div>
+              <div class="p-5 flex justify-between items-center">
+                <div>
+                  <h3 class="font-bold text-gray-800">Helado Frito</h3>
+                  <p class="text-gray-400 text-xs">Crujiente Vainilla</p>
+                </div>
+                <span class="text-orange-600 font-black text-xl tracking-tight">$95</span>
+              </div>
+            </div>
+
+            <div data-category="bebida" data-price="35" data-name="Refrescos"
+              onclick="openProduct('Refresco 355ml', 35, 'https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=600', 'Coca-Cola, Sprite o Manzana.', 'bebida')"
+              class="product-card bg-white rounded-[2rem] overflow-hidden shadow-sm border border-gray-100 cursor-pointer group transform transition-all hover:shadow-lg">
+              <div
+                class="relative h-40 overflow-hidden bg-blue-50 flex items-center justify-center text-7xl text-blue-500">
+                <i class='bx bx-drink'></i>
+              </div>
+              <div class="p-5 flex justify-between items-center">
+                <div>
+                  <h3 class="font-bold text-gray-800">Refrescos</h3>
+                  <p class="text-gray-400 text-xs">Variedad 355ml</p>
+                </div>
+                <span class="text-orange-600 font-black text-xl tracking-tight">$35</span>
+              </div>
+            </div>
+
+            <div data-category="bebida" data-price="120" data-name="Vino Tinto"
+              onclick="openProduct('Vino Tinto Copa', 120, 'https://images.unsplash.com/photo-1630369160812-26c7604cbd8c?q=80&w=388&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', 'Copa de vino de la casa.', 'bebida')"
+              class="product-card bg-white rounded-[2rem] overflow-hidden shadow-sm border border-gray-100 cursor-pointer group transform transition-all hover:shadow-lg">
+              <div
+                class="relative h-40 overflow-hidden bg-red-50 flex items-center justify-center text-7xl text-red-700">
+                <i class='bx bx-wine'></i>
+              </div>
+              <div class="p-5 flex justify-between items-center">
+                <div>
+                  <h3 class="font-bold text-gray-800">Vino Tinto</h3>
+                  <p class="text-gray-400 text-xs">Copa de la Casa</p>
+                </div>
+                <span class="text-orange-600 font-black text-xl tracking-tight">$120</span>
+              </div>
+            </div>
+
+            <div data-category="bebida" data-price="40" data-name="Jamaica"
+              onclick="openProduct('Agua de Jamaica', 40, 'https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=600', 'Agua fresca de flor de Jamaica natural.', 'bebida')"
+              class="product-card bg-white rounded-[2rem] overflow-hidden shadow-sm border border-gray-100 cursor-pointer group transform transition-all hover:shadow-lg">
+              <div
+                class="relative h-40 overflow-hidden bg-red-50 flex items-center justify-center text-7xl text-red-400">
+                <i class='bx bx-water'></i>
+              </div>
+              <div class="p-5 flex justify-between items-center">
+                <div>
+                  <h3 class="font-bold text-gray-800">Jamaica</h3>
+                  <p class="text-gray-400 text-xs">Agua Fresca</p>
+                </div>
+                <span class="text-orange-600 font-black text-xl tracking-tight">$40</span>
+              </div>
+            </div>
+
+            <div data-category="bebida" data-price="40" data-name="Horchata"
+              onclick="openProduct('Agua de Horchata', 40, 'https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=600', 'Receta artesanal con canela.', 'bebida')"
+              class="product-card bg-white rounded-[2rem] overflow-hidden shadow-sm border border-gray-100 cursor-pointer group transform transition-all hover:shadow-lg">
+              <div
+                class="relative h-40 overflow-hidden bg-yellow-50 flex items-center justify-center text-7xl text-yellow-600">
+                <i class='bx bx-water'></i>
+              </div>
+              <div class="p-5 flex justify-between items-center">
+                <div>
+                  <h3 class="font-bold text-gray-800">Horchata</h3>
+                  <p class="text-gray-400 text-xs">Artesanal</p>
+                </div>
+                <span class="text-orange-600 font-black text-xl tracking-tight">$40</span>
+              </div>
+            </div>
+
+          </div>
+        </section>
+      </div>
+      <div id="view-order" class="space-y-12 hidden pt-6 lg:pt-0">
+        <div class="flex items-center gap-4 mb-10 border-b border-gray-100 pb-6">
+          <div class="w-14 h-14 bg-stone-900 text-orange-500 rounded-2xl flex items-center justify-center text-4xl">
+            <i class='bx bx-list-check'></i>
+          </div>
+          <div>
+            <h2 class="text-3xl font-black text-gray-800 uppercase italic tracking-tighter">Mi Pedido Confirmado</h2>
+            <p class="text-gray-500">Aquí verás tus pedidos finalizados y en proceso.</p>
+          </div>
+        </div>
+
+        <div id="empty-order-state"
+          class="bg-white p-16 rounded-[2.5rem] text-center border border-gray-100 shadow-sm flex flex-col items-center">
+          <i class='bx bx-receipt text-8xl text-gray-200 mb-8'></i>
+          <h3 class="text-2xl font-bold text-gray-700 mb-3">Aún no tienes pedidos confirmados</h3>
+          <p class="text-gray-500 max-w-sm mb-10">Agrega platillos deliciosos de nuestro menú al carrito y completa tu
+            orden.</p>
+          <button onclick="showView('menu'); return false;"
+            class="bg-orange-600 text-white font-bold py-4 px-10 rounded-xl shadow-lg hover:bg-orange-700 transform transition-all flex items-center gap-2 text-lg">
+            Ver Menú Completo
+            <i class='bx bx-restaurant'></i>
+          </button>
+        </div>
+
+        <div id="confirmed-orders-container" class="space-y-8 hidden">
+          <div class="order-card bg-white p-8 rounded-[2.5rem] border border-gray-100 shadow-sm relative">
+            <span
+              class="absolute top-6 right-8 bg-orange-100 text-orange-600 font-bold px-4 py-1.5 rounded-full text-xs">Confirmado
+              #<span id="demo-order-number">0001</span></span>
+
+            <h4 class="text-xl font-bold mb-6 pb-4 border-b border-gray-100">Resumen del Pedido</h4>
+
+            <div class="order-items-list space-y-4 mb-6">
+              <div class="flex items-center gap-4 bg-stone-50 p-4 rounded-xl border border-gray-100">
+                <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=200"
+                  class="w-16 h-16 object-cover rounded-lg">
+                <div class="flex-1">
+                  <p class="font-bold text-stone-900">Pizza Artesanal x1</p>
+                  <p class="text-gray-500 text-xs">Acompañamiento: Papas Francesas</p>
+                </div>
+                <p class="font-black text-lg text-orange-600">$240</p>
+              </div>
+              <div class="flex items-center gap-4 bg-stone-50 p-4 rounded-xl border border-gray-100">
+                <div
+                  class="w-16 h-16 object-cover rounded-lg bg-red-50 flex items-center justify-center text-4xl text-red-700">
+                  <i class='bx bx-wine'></i>
+                </div>
+                <div class="flex-1">
+                  <p class="font-bold text-stone-900">Vino Tinto Copa x2</p>
+                </div>
+                <p class="font-black text-lg text-orange-600">$240</p>
+              </div>
+            </div>
+
+            <div class="flex justify-between items-center pt-5 border-t border-gray-100">
+              <p class="text-lg text-gray-500">Monto Total:</p>
+              <p class="font-black text-4xl text-stone-900">$<span id="demo-order-total">480</span></p>
+            </div>
           </div>
         </div>
       </div>
-    </section>
+    </main>
+  </div>
 
-    <section>
-      <h2 class="text-xl font-black text-gray-800 mb-6 border-l-4 border-orange-500 pl-3 uppercase italic">Pastas
-        Italianas</h2>
-      <div class="grid gap-4">
-        <div
-          onclick="openProduct('Pasta Alfredo', 165, 'https://images.unsplash.com/photo-1645112481338-331499700320?w=500', 'Fettuccine en crema de parmesano y mantequilla con pollo grill.')"
-          class="bg-white p-4 rounded-3xl shadow-sm flex gap-4 items-center">
-          <img src="https://images.unsplash.com/photo-1645112481338-331499700320?w=500"
-            class="w-20 h-20 object-cover rounded-2xl">
-          <div class="flex-1">
-            <h3 class="font-bold text-sm">Estilo Alfredo</h3>
-            <p class="text-orange-600 font-black">$165</p>
-          </div>
-        </div>
-        <div
-          onclick="openProduct('Pasta Boloñesa', 155, 'https://images.unsplash.com/photo-1598866539627-9e692f1a6377?w=500', 'Receta tradicional con carne de res y pomodoro casero.')"
-          class="bg-white p-4 rounded-3xl shadow-sm flex gap-4 items-center">
-          <img src="https://images.unsplash.com/photo-1598866539627-9e692f1a6377?w=500"
-            class="w-20 h-20 object-cover rounded-2xl">
-          <div class="flex-1">
-            <h3 class="font-bold text-sm">Boloñesa Real</h3>
-            <p class="text-orange-600 font-black">$155</p>
-          </div>
-        </div>
-        <div
-          onclick="openProduct('Pasta al Pesto', 150, 'https://images.unsplash.com/photo-1473093226795-af9932fe5856?w=500', 'Albahaca fresca, piñones y aceite de oliva extra virgen.')"
-          class="bg-white p-4 rounded-3xl shadow-sm flex gap-4 items-center">
-          <img src="https://images.unsplash.com/photo-1473093226795-af9932fe5856?w=500"
-            class="w-20 h-20 object-cover rounded-2xl">
-          <div class="flex-1">
-            <h3 class="font-bold text-sm">Pesto Genovés</h3>
-            <p class="text-orange-600 font-black">$150</p>
-          </div>
-        </div>
+  <footer id="main-footer" class="bg-stone-900 text-white mt-16 px-10 py-12 transition-all duration-300 lg:ml-80">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+      <div class="text-center md:text-left">
+        <h3 class="text-2xl font-black text-orange-500 italic tracking-tight">AAM GOURMET FOOD</h3>
+        <p class="text-[10px] text-gray-400 tracking-[0.3em] uppercase mt-1">Sabor que trasciende</p>
       </div>
-    </section>
 
-    <section>
-      <h2 class="text-xl font-black text-gray-800 mb-6 border-l-4 border-orange-500 pl-3 uppercase italic">Sopas y
-        Cremas</h2>
-      <div class="grid grid-cols-2 gap-4">
-        <div
-          onclick="openProduct('Sopa de Tomate', 85, 'https://images.unsplash.com/photo-1547592115-f996c990264b?w=400', 'Tomate rostizado con albahaca.')"
-          class="bg-white p-3 rounded-[2rem] shadow-sm text-center cursor-pointer">
-          <img src="https://images.unsplash.com/photo-1547592115-f996c990264b?w=400"
-            class="w-full h-24 object-cover rounded-2xl mb-2">
-          <h3 class="font-bold text-[10px] uppercase">Tomate</h3>
-          <p class="text-orange-600 font-black">$85</p>
-        </div>
-        <div
-          onclick="openProduct('Crema Elote', 85, 'https://images.unsplash.com/photo-1603105037880-880cd4edfb0d?w=400', 'Elote tierno con chile quebrado.')"
-          class="bg-white p-3 rounded-[2rem] shadow-sm text-center border border-gray-50">
-          <img src="https://images.unsplash.com/photo-1603105037880-880cd4edfb0d?w=400"
-            class="w-full h-24 object-cover rounded-2xl mb-2">
-          <h3 class="font-bold text-sm">Elote Tierno</h3>
-          <p class="text-orange-600 font-black">$85</p>
-        </div>
-        <div
-          onclick="openProduct('Crema Champiñones', 85, 'https://images.unsplash.com/photo-1547592166-23ac45744acd?w=400', 'Champiñones frescos y crotones.')"
-          class="bg-white p-3 rounded-[2rem] shadow-sm text-center cursor-pointer">
-          <img src="https://images.unsplash.com/photo-1547592166-23ac45744acd?w=400"
-            class="w-full h-24 object-cover rounded-2xl mb-2">
-          <h3 class="font-bold text-[10px] uppercase">Champiñones</h3>
-          <p class="text-orange-600 font-black">$85</p>
-        </div>
+      <div class="flex items-center gap-5">
+        <a href="#" class="text-4xl text-gray-400 hover:text-white transform transition-all hover:scale-110">
+          <i class='bx bxl-facebook-circle'></i>
+        </a>
+        <a href="#" class="text-4xl text-gray-400 hover:text-white transform transition-all hover:scale-110">
+          <i class='bx bxl-instagram'></i>
+        </a>
       </div>
-    </section>
+    </div>
+    <div class="max-w-7xl mx-auto mt-10 pt-8 border-t border-gray-700 text-center">
+      <p class="text-gray-400 text-sm">© AAM Gourmet @copyright 2026. Todos los derechos reservados.</p>
+      <p class="text-xs text-gray-600 mt-1">Demo para fines de pre-visualización.</p>
+    </div>
+  </footer>
 
-    <section>
-      <h2 class="text-xl font-black text-gray-800 mb-6 border-l-4 border-orange-500 pl-3 uppercase italic">Bebidas</h2>
-      <div class="space-y-4">
-        <div class="flex gap-4 overflow-x-auto no-scrollbar pb-2">
-          <div
-            onclick="openProduct('Refresco 355ml', 35, 'https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=400', 'Coca-Cola, Sprite o Manzana.')"
-            class="min-w-[120px] bg-white p-4 rounded-3xl shadow-sm text-center border border-gray-100">
-            <i class='bx bx-drink text-3xl text-blue-500'></i>
-            <p class="font-bold text-[10px] mt-2 uppercase">Refrescos</p>
-            <p class="text-orange-600 font-black">$35</p>
-          </div>
-          <div
-            onclick="openProduct('Vino Tinto (Copa)', 120, 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=400', 'Copa de vino de la casa.')"
-            class="min-w-[140px] bg-white p-4 rounded-3xl shadow-sm text-center border border-gray-100">
-            <i class='bx bx-wine text-3xl text-red-700'></i>
-            <p class="font-bold text-xs mt-2 uppercase">Vino Tinto</p>
-            <p class="text-orange-600 font-black">$120</p>
-          </div>
-          <div
-            onclick="openProduct('Agua de Jamaica', 40, 'https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=400', 'Agua fresca de flor de Jamaica natural.')"
-            class="min-w-[120px] bg-white p-4 rounded-3xl shadow-sm text-center border border-gray-100">
-            <i class='bx bx-water text-3xl text-red-400'></i>
-            <p class="font-bold text-[10px] mt-2 uppercase">Jamaica</p>
-            <p class="text-orange-600 font-black">$40</p>
-          </div>
-          <div
-            onclick="openProduct('Agua de Horchata', 40, 'https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=400', 'Receta artesanal con canela.')"
-            class="min-w-[120px] bg-white p-4 rounded-3xl shadow-sm text-center border border-gray-100">
-            <i class='bx bx-water text-3xl text-yellow-600'></i>
-            <p class="font-bold text-[10px] mt-2 uppercase">Horchata</p>
-            <p class="text-orange-600 font-black">$40</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <h2 class="text-xl font-black text-gray-800 mb-6 border-l-4 border-orange-500 pl-3 uppercase italic">Postres
-        Gourmet</h2>
-      <div class="grid grid-cols-2 gap-4">
-        <div
-          onclick="openProduct('Tiramisú', 110, 'https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?w=400', 'Café espresso, mascarpone y cacao.')"
-          class="bg-white p-3 rounded-[2rem] shadow-sm text-center">
-          <img src="https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?w=400"
-            class="w-full h-24 object-cover rounded-2xl mb-2">
-          <h3 class="font-bold text-xs uppercase">Tiramisú</h3>
-          <p class="text-orange-600 font-black">$110</p>
-        </div>
-        <div
-          onclick="openProduct('Helado Frito', 95, 'https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=400', 'Vainilla crujiente con salsa de chocolate.')"
-          class="bg-white p-3 rounded-[2rem] shadow-sm text-center">
-          <img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=400"
-            class="w-full h-24 object-cover rounded-2xl mb-2">
-          <h3 class="font-bold text-xs uppercase">Helado Frito</h3>
-          <p class="text-orange-600 font-black">$95</p>
-        </div>
-      </div>
-    </section>
-
-  </main>
 
   <div id="product-modal"
-    class="fixed inset-0 bg-black/80 z-[100] hidden flex items-end justify-center backdrop-blur-sm">
+    class="fixed inset-0 bg-black/80 z-[200] hidden flex items-end lg:items-center justify-center backdrop-blur-sm">
     <div
-      class="bg-white w-full max-w-md rounded-t-[3rem] max-h-[92vh] overflow-y-auto no-scrollbar relative animate-up">
-      <div class="relative h-64">
+      class="bg-white w-full max-w-md lg:rounded-3xl rounded-t-[3rem] max-h-[95vh] overflow-y-auto no-scrollbar relative animate-up lg:animate-none shadow-2xl">
+      <div class="relative h-64 lg:h-80">
         <img id="modal-img" src="" class="w-full h-full object-cover">
         <button onclick="closeProduct()"
-          class="absolute top-6 right-6 bg-black/40 text-white w-10 h-10 rounded-full flex items-center justify-center"><i
-            class='bx bx-x text-2xl'></i></button>
+          class="absolute top-6 right-6 bg-black/40 text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-black/60 transition-all">
+          <i class='bx bx-x text-2xl'></i>
+        </button>
       </div>
       <div class="p-8">
         <div class="flex justify-between items-start mb-2">
-          <h2 id="modal-name" class="text-2xl font-black text-gray-800 italic">Producto</h2>
-          <span id="base-price" class="text-xl font-black text-orange-600">$0</span>
+          <h2 id="modal-name" class="text-2xl font-black text-gray-800 italic tracking-tight">Producto</h2>
+          <span id="base-price" class="text-xl font-black text-orange-600 tracking-tight">$0</span>
         </div>
         <p id="modal-desc" class="text-gray-500 text-sm mb-8">Descripción.</p>
 
-        <div class="flex items-center justify-between bg-stone-100 p-4 rounded-2xl mb-8">
-          <span class="font-bold text-gray-700">Cantidad</span>
-          <div class="flex items-center gap-5">
+        <div
+          class="flex items-center justify-between bg-stone-100 p-5 rounded-2xl mb-10 border border-gray-100 shadow-inner">
+          <span class="font-bold text-gray-700 text-lg">Cantidad</span>
+          <div class="flex items-center gap-6">
             <button onclick="changeQty(-1)"
-              class="w-10 h-10 bg-white rounded-xl shadow-sm text-orange-600 font-bold">-</button>
-            <span id="modal-qty" class="font-black text-lg">1</span>
+              class="w-12 h-12 bg-white rounded-xl shadow text-orange-600 font-bold text-2xl hover:bg-orange-50">-</button>
+            <span id="modal-qty" class="font-black text-2xl text-stone-900">1</span>
             <button onclick="changeQty(1)"
-              class="w-10 h-10 bg-white rounded-xl shadow-sm text-orange-600 font-bold">+</button>
+              class="w-12 h-12 bg-white rounded-xl shadow text-orange-600 font-bold text-2xl hover:bg-orange-50">+</button>
           </div>
         </div>
 
-        <div class="relative mb-10">
-          <div class="flex justify-between items-center mb-4">
-            <h4 class="font-black text-gray-800 text-[10px] tracking-widest uppercase italic">Mejora tu orden:</h4>
+        <div id="extras-section" class="relative mb-12 hidden">
+          <div class="flex justify-between items-center mb-5 pb-2 border-b border-gray-100">
+            <h4 class="font-black text-gray-800 text-sm tracking-widest uppercase italic">Mejora tu orden:</h4>
             <div class="flex gap-2">
-              <button onclick="scrollExtras(-150)"
-                class="w-7 h-7 bg-stone-100 rounded-full flex items-center justify-center text-gray-400"><i
-                  class='bx bx-chevron-left'></i></button>
-              <button onclick="scrollExtras(150)"
-                class="w-7 h-7 bg-stone-100 rounded-full flex items-center justify-center text-gray-400"><i
-                  class='bx bx-chevron-right'></i></button>
+              <button onclick="scrollExtras(-180)"
+                class="w-9 h-9 bg-stone-100 rounded-full flex items-center justify-center text-gray-500 hover:bg-gray-200"><i
+                  class='bx bx-chevron-left text-xl'></i></button>
+              <button onclick="scrollExtras(180)"
+                class="w-9 h-9 bg-stone-100 rounded-full flex items-center justify-center text-gray-500 hover:bg-gray-200"><i
+                  class='bx bx-chevron-right text-xl'></i></button>
             </div>
           </div>
-          <div id="extras-slider" class="flex gap-3 overflow-x-auto no-scrollbar scroll-smooth">
-            <div onclick="toggleExtra(this, 45)"
-              class="min-w-[130px] p-3 rounded-2xl border-2 border-transparent bg-stone-50 cursor-pointer">
-              <img src="https://images.unsplash.com/photo-1573015613030-24791add9ca0?w=200"
-                class="w-full h-20 object-cover rounded-xl mb-2">
-              <p class="text-[9px] font-bold text-gray-700">Papas Francesas</p>
-              <p class="text-orange-600 font-bold text-xs mt-1">+$45</p>
-            </div>
-            <div onclick="toggleExtra(this, 55)"
-              class="min-w-[130px] p-3 rounded-2xl border-2 border-transparent bg-stone-50 cursor-pointer">
-              <img src="https://images.unsplash.com/photo-1625944230945-174404f9224c?w=200"
-                class="w-full h-20 object-cover rounded-xl mb-2">
-              <p class="text-[9px] font-bold text-gray-700">Ensalada Extra</p>
-              <p class="text-orange-600 font-bold text-xs mt-1">+$55</p>
-            </div>
+          <div id="extras-slider" class="flex gap-4 overflow-x-auto no-scrollbar scroll-smooth -mx-1 px-1">
           </div>
         </div>
 
-        <button onclick="confirmOrder()"
-          class="w-full bg-orange-600 text-white font-black py-5 rounded-[2rem] shadow-xl shadow-orange-200 flex justify-between px-8 items-center">
-          <span class="uppercase tracking-widest text-[10px]">Añadir a la orden</span>
-          <span id="total-price-modal" class="bg-orange-500/50 px-4 py-1 rounded-lg">$0</span>
+        <button onclick="addCurrentProductToCart()"
+          class="w-full bg-orange-600 text-white font-black py-5 rounded-[1.5rem] shadow-xl shadow-orange-200 flex justify-between px-8 items-center text-lg hover:bg-orange-700 transform transition-all hover:scale-[1.02]">
+          <span class="uppercase tracking-widest text-xs font-bold">Añadir a la orden</span>
+          <span id="total-price-modal" class="bg-orange-500/50 px-5 py-1.5 rounded-lg">$0</span>
         </button>
       </div>
     </div>
   </div>
 
-  <div id="cart-bar" class="fixed bottom-8 left-1/2 -translate-x-1/2 w-[90%] max-w-md hidden">
-    <button
-      class="w-full bg-gray-900 text-white p-5 rounded-[2.5rem] shadow-2xl flex justify-between items-center px-8">
-      <div class="flex items-center gap-4">
-        <div class="relative"><i class='bx bx-shopping-bag text-2xl text-orange-500'></i><span id="cart-count"
-            class="absolute -top-2 -right-2 bg-white text-black text-[10px] font-black px-1.5 rounded-full">0</span>
+
+  <div id="cart-bar" class="fixed bottom-6 left-1/2 -translate-x-1/2 w-[92%] max-w-md hidden z-[80] lg:hidden">
+    <button onclick="confirmOrderFromCart()"
+      class="w-full bg-gray-900 text-white p-5 rounded-[2.5rem] shadow-2xl flex justify-between items-center px-10 border-4 border-white hover:bg-black transition-all">
+      <div class="flex items-center gap-5">
+        <div class="relative">
+          <i class='bx bx-shopping-bag text-3xl text-orange-500'></i>
+          <span id="cart-count-bar"
+            class="absolute -top-2 -right-2 bg-white text-black text-[11px] font-black w-6 h-6 flex items-center justify-center rounded-full">0</span>
         </div>
-        <span class="font-bold uppercase tracking-widest text-[9px]">Ver mi pedido</span>
+        <div>
+          <span class="font-black uppercase tracking-widest text-[10px] block text-gray-300">Ver mi pedido</span>
+          <span class="font-bold text-sm text-white">Completar orden</span>
+        </div>
       </div>
-      <span id="cart-total" class="font-black text-lg text-white">$0</span>
+      <span id="cart-total-bar" class="font-black text-2xl text-white tracking-tight">$0</span>
     </button>
   </div>
 
-  <script>
-    let currentPrice = 0, extrasTotal = 0, qty = 1, cartTotal = 0, cartCount = 0;
 
-    function openProduct(name, price, img, desc) {
-      currentPrice = price; extrasTotal = 0; qty = 1;
-      document.querySelectorAll('.active-extra').forEach(el => el.classList.remove('active-extra'));
+  <script>
+    // Variables de Estado
+    let cart = []; // Estructura: [{id: 'name_cat', name: '', basePrice: 0, qty: 1, extra: {name: '', price: 0}, total: 0, img: ''}]
+    let cartTotal = 0;
+    let cartCount = 0;
+
+    // Variables de Estado del Modal Actual
+    let currentBaseProduct = { name: '', price: 0, img: '', category: '' };
+    let currentQty = 1;
+    let currentExtraTotal = 0;
+    let currentSelectedExtra = { name: null, price: 0 };
+
+    // Simulación de Base de Datos de Acompañamientos por Categoría
+    const extrasDatabase = {
+      'plato fuerte': [
+        { name: 'Papas Francesas', price: 45, img: 'https://images.unsplash.com/photo-1573015613030-24791add9ca0?w=200' },
+        { name: 'Ensalada Extra', price: 55, img: 'https://images.unsplash.com/photo-1625944230945-174404f9224c?w=200' },
+        { name: 'Aros de Cebolla', price: 50, img: 'https://images.unsplash.com/photo-1619604176272-9b626e9596c0?w=200&h=200&fit=crop' }
+      ],
+      'pasta': [
+        { name: 'Pan con Ajo x2', price: 30, img: 'https://images.unsplash.com/photo-1533776189569-45f8f5533fb3?w=200' },
+        { name: 'Queso Parmesano', price: 25, img: 'https://images.unsplash.com/photo-1621689252066-5e04e76d2ae0?w=200' }
+      ],
+      'sopa': [
+        { name: 'Crotones Extra', price: 20, img: 'https://images.unsplash.com/photo-1603105037880-880cd4edfb0d?w=200' },
+        { name: 'Pan Artesanal', price: 35, img: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=200' }
+      ]
+    };
+
+    // --- FUNCIONES INTERFAZ LATERAL ---
+    function toggleSideMenu() {
+      const menu = document.getElementById('side-menu');
+      const overlay = document.getElementById('side-menu-overlay');
+      const isHidden = menu.classList.contains('hidden');
+      if (isHidden) {
+        menu.classList.remove('hidden');
+        menu.classList.add('flex', 'animate-left-slide'); // Necesitarías definir animate-left-slide
+        overlay.classList.remove('hidden');
+      } else {
+        menu.classList.add('hidden');
+        menu.classList.remove('flex');
+        overlay.classList.add('hidden');
+      }
+    }
+
+    function showView(viewName) {
+      document.getElementById('view-menu').classList.add('hidden');
+      document.getElementById('view-order').classList.add('hidden');
+      document.getElementById(`view-${viewName}`).classList.remove('hidden');
+
+      document.querySelectorAll('.side-menu-link').forEach(el => el.classList.remove('active'));
+      document.getElementById(`link-${viewName}`).classList.add('active');
+
+      if (window.innerWidth < 1024) toggleSideMenu(); // Cerrar menú móvil al navegar
+      window.scrollTo(0, 0); // Ir arriba
+    }
+
+    // --- FUNCIONES SISTEMA DE CATEGORÍAS (FILTRADO) ---
+    function filterCategory(category, element) {
+      const currentCategoryTitle = document.getElementById('current-category-title');
+      currentCategoryTitle.innerText = category === 'all' ? 'Todos los Platillos' : category.charAt(0).toUpperCase() + category.slice(1);
+
+      document.querySelectorAll('.category-btn').forEach(el => el.classList.remove('active'));
+      if (element) element.classList.add('active');
+
+      const products = document.querySelectorAll('.product-card');
+      let visibleCount = 0;
+      products.forEach(product => {
+        if (category === 'all' || product.dataset.category === category) {
+          product.classList.remove('hidden');
+          visibleCount++;
+        } else {
+          product.classList.add('hidden');
+        }
+      });
+
+      const resultsCountText = visibleCount === products.length ? 'Ver Todo' : `${visibleCount} Resultados`;
+      document.getElementById('results-count').innerText = resultsCountText;
+    }
+
+    // Inicializar cuenta
+    filterCategory('all');
+
+    // --- FUNCIONES SISTEMA DE BÚSQUEDA ---
+    function searchProducts() {
+      const searchInput = document.getElementById('search-input').value.toLowerCase();
+      const products = document.querySelectorAll('.product-card');
+      let visibleCount = 0;
+
+      // Desactivar filtros de categoría
+      document.querySelectorAll('.category-btn').forEach(el => el.classList.remove('active'));
+      document.getElementById('current-category-title').innerText = searchInput === '' ? 'Todos los Platillos' : `Resultados para: "${searchInput}"`;
+
+      products.forEach(product => {
+        const productName = product.dataset.name.toLowerCase();
+        if (productName.includes(searchInput)) {
+          product.classList.remove('hidden');
+          visibleCount++;
+        } else {
+          product.classList.add('hidden');
+        }
+      });
+      document.getElementById('results-count').innerText = `${visibleCount} Resultados`;
+    }
+
+    // --- FUNCIONES SISTEMA DE ORDENACIÓN ---
+    function sortProducts() {
+      const sortValue = document.getElementById('sort-select').value;
+      const grid = document.getElementById('product-grid');
+      const productsArray = Array.from(document.querySelectorAll('.product-card'));
+
+      if (sortValue === 'default') return;
+
+      productsArray.sort((a, b) => {
+        const priceA = parseInt(a.dataset.price);
+        const priceB = parseInt(b.dataset.price);
+        const nameA = a.dataset.name.toLowerCase();
+        const nameB = b.dataset.name.toLowerCase();
+
+        if (sortValue === 'price-low') return priceA - priceB;
+        if (sortValue === 'price-high') return priceB - priceA;
+        if (sortValue === 'name') return nameA.localeCompare(nameB);
+        return 0;
+      });
+
+      productsArray.forEach(product => grid.appendChild(product)); // Re-insertar ordenados
+    }
+
+    // --- FUNCIONES MODAL PRODUCTO ---
+    function openProduct(name, price, img, desc, category) {
+      // Estado reset
+      currentBaseProduct = { name, price, img, category };
+      currentQty = 1;
+      currentExtraTotal = 0;
+      currentSelectedExtra = { name: null, price: 0 };
+
+      // Contenido Básico
       document.getElementById('modal-name').innerText = name;
       document.getElementById('base-price').innerText = `$${price}`;
       document.getElementById('modal-img').src = img;
       document.getElementById('modal-desc').innerText = desc;
-      document.getElementById('modal-qty').innerText = qty;
+      document.getElementById('modal-qty').innerText = currentQty;
+
       updateModalTotal();
+      renderAcompañamientos(category);
+
       document.getElementById('product-modal').classList.remove('hidden');
     }
 
     function closeProduct() { document.getElementById('product-modal').classList.add('hidden'); }
-    function changeQty(val) { if (qty + val >= 1) { qty += val; document.getElementById('modal-qty').innerText = qty; updateModalTotal(); } }
+    function changeQty(val) { if (currentQty + val >= 1) { currentQty += val; document.getElementById('modal-qty').innerText = currentQty; updateModalTotal(); } }
     function scrollExtras(val) { document.getElementById('extras-slider').scrollBy({ left: val, behavior: 'smooth' }); }
 
-    function toggleExtra(element, price) {
-      if (element.classList.contains('active-extra')) { element.classList.remove('active-extra'); extrasTotal -= price; }
-      else { element.classList.add('active-extra'); extrasTotal += price; }
+    // Renderizado dinámico de acompañamientos según la categoría
+    function renderAcompañamientos(category) {
+      const slider = document.getElementById('extras-slider');
+      const section = document.getElementById('extras-section');
+      slider.innerHTML = ''; // Limpiar previo
+
+      const extras = extrasDatabase[category];
+      if (extras) {
+        section.classList.remove('hidden');
+        extras.forEach(extra => {
+          const extraEl = document.createElement('div');
+          extraEl.onclick = function () { toggleExtra(this, extra.name, extra.price); };
+          extraEl.className = 'min-w-[150px] p-4 rounded-2xl border-2 border-transparent bg-stone-50 cursor-pointer group transform transition-all hover:scale-105 hover:bg-white hover:shadow';
+          extraEl.innerHTML = `
+            <img src="${extra.img}" class="w-full h-24 object-cover rounded-xl mb-3 shadow-inner">
+            <p class="text-[10px] font-bold text-gray-700 uppercase tracking-wider">${extra.name}</p>
+            <p class="text-orange-600 font-black text-sm mt-1">+$${extra.price}</p>
+          `;
+          slider.appendChild(extraEl);
+        });
+      } else {
+        section.classList.add('hidden'); // Ocultar sección si no hay extras
+      }
+    }
+
+    function toggleExtra(element, extraName, extraPrice) {
+      const isSelected = element.classList.contains('active-extra');
+
+      // Lógica de selección única (sólo un extra por producto)
+      document.querySelectorAll('.active-extra').forEach(el => el.classList.remove('active-extra'));
+
+      if (!isSelected) {
+        element.classList.add('active-extra');
+        currentSelectedExtra = { name: extraName, price: extraPrice };
+        currentExtraTotal = extraPrice;
+      } else {
+        currentSelectedExtra = { name: null, price: 0 };
+        currentExtraTotal = 0;
+      }
       updateModalTotal();
     }
 
     function updateModalTotal() {
-      const total = (currentPrice + extrasTotal) * qty;
+      const total = (currentBaseProduct.price + currentExtraTotal) * currentQty;
       document.getElementById('total-price-modal').innerText = `$${total}`;
     }
 
-    function confirmOrder() {
-      cartTotal += (currentPrice + extrasTotal) * qty;
-      cartCount += qty;
-      document.getElementById('cart-total').innerText = `$${cartTotal}`;
-      document.getElementById('cart-count').innerText = cartCount;
-      document.getElementById('cart-bar').classList.remove('hidden');
+    // --- FUNCIONES LÓGICA CARRITO DE COMPRAS ---
+    function addCurrentProductToCart() {
+      const productCartTotal = (currentBaseProduct.price + currentExtraTotal) * currentQty;
+
+      const cartItem = {
+        id: `${currentBaseProduct.name.replace(/\s+/g, '_')}_${currentBaseProduct.category}_${currentSelectedExtra.name ? currentSelectedExtra.name.replace(/\s+/g, '_') : 'none'}`,
+        name: currentBaseProduct.name,
+        basePrice: currentBaseProduct.price,
+        qty: currentQty,
+        extra: { ...currentSelectedExtra },
+        total: productCartTotal,
+        img: currentBaseProduct.img,
+        category: currentBaseProduct.category
+      };
+
+      cart.push(cartItem);
+      updateCartState();
+
+      // Feedback visual y cerrar modal
+      alert(`✅ ${cartItem.qty}x ${cartItem.name} añadido a tu carrito.`);
       closeProduct();
     }
+
+    function updateCartState() {
+      cartTotal = cart.reduce((sum, item) => sum + item.total, 0);
+      cartCount = cart.reduce((sum, item) => sum + item.qty, 0);
+
+      // Actualizar UI Barra Móvil
+      document.getElementById('cart-total-bar').innerText = `$${cartTotal}`;
+      document.getElementById('cart-count-bar').innerText = cartCount;
+      if (cartCount > 0) document.getElementById('cart-bar').classList.remove('hidden');
+      else document.getElementById('cart-bar').classList.add('hidden');
+
+      // Actualizar UI Lateral Desktop
+      document.getElementById('cart-total-side').innerText = `$${cartTotal}`;
+      document.getElementById('cart-count-side').innerText = `${cartCount} items`;
+    }
+
+    // --- SIMULACIÓN FINALIZAR PEDIDO (Carrito -> Mi Pedido) ---
+    function confirmOrderFromCart() {
+      if (cartCount === 0) { alert("Tu carrito está vacío."); return; }
+
+      const confirmAction = confirm(`¿Estás seguro de completar tu orden por un total de $${cartTotal}? (Esta es una simulación de demo)`);
+      if (!confirmAction) return;
+
+      // 1. Almacenar información del pedido confirmado (Simulación)
+      const confirmedOrder = {
+        number: `000${Date.now().toString().slice(-1)}`, // Generar número aleatorio
+        items: [...cart], // Clonar items del carrito
+        total: cartTotal
+      };
+      saveConfirmedOrder(confirmedOrder);
+
+      // 2. Eliminar información del carrito y resetear UI
+      cart = [];
+      updateCartState();
+
+      alert(`¡Pedido Completado! Tu número de orden es ${confirmedOrder.number}. Puedes verlo en 'Mi Pedido Confirmado'.`);
+
+      // 3. Navegar a la vista de pedidos
+      showView('order');
+    }
+
+    // --- FUNCIONES GESTIÓN DE PEDIDOS CONFIRMADOS (Simulación persistencia) ---
+    let confirmedOrders = []; // Array de objetos {number, items:[], total}
+
+    function saveConfirmedOrder(order) {
+      confirmedOrders.push(order);
+      renderConfirmedOrders();
+    }
+
+    function renderConfirmedOrders() {
+      const emptyState = document.getElementById('empty-order-state');
+      const container = document.getElementById('confirmed-orders-container');
+      const badge = document.getElementById('order-count-badge');
+
+      container.innerHTML = ''; // Limpiar previo
+
+      if (confirmedOrders.length === 0) {
+        emptyState.classList.remove('hidden');
+        container.classList.add('hidden');
+        badge.classList.add('hidden');
+        return;
+      }
+
+      emptyState.classList.add('hidden');
+      container.classList.remove('hidden');
+      badge.classList.remove('hidden');
+      badge.innerText = confirmedOrders.length;
+
+      // Renderizar cada pedido confirmado (más reciente primero)
+      [...confirmedOrders].reverse().forEach(order => {
+        const orderCard = document.createElement('div');
+        orderCard.className = 'order-card bg-white p-8 rounded-[2.5rem] border border-gray-100 shadow-sm relative';
+
+        let itemsHtml = '';
+        order.items.forEach(item => {
+          let extraInfo = item.extra.name ? `<p class="text-gray-500 text-xs mt-0.5">Acompañamiento: ${item.extra.name}</p>` : '';
+
+          let imgHtml = item.category === 'bebida'
+            ? `<div class="w-16 h-16 object-cover rounded-lg bg-orange-50 flex items-center justify-center text-4xl text-orange-500"><i class='bx bx-drink'></i></div>`
+            : `<img src="${item.img}" class="w-16 h-16 object-cover rounded-lg">`;
+
+          itemsHtml += `
+            <div class="flex items-center gap-4 bg-stone-50 p-4 rounded-xl border border-gray-100">
+              ${imgHtml}
+              <div class="flex-1">
+                <p class="font-bold text-stone-900">${item.name} x${item.qty}</p>
+                ${extraInfo}
+              </div>
+              <p class="font-black text-xl text-orange-600 tracking-tight">$${item.total}</p>
+            </div>
+          `;
+        });
+
+        orderCard.innerHTML = `
+          <span class="absolute top-6 right-8 bg-orange-100 text-orange-600 font-bold px-4 py-1.5 rounded-full text-xs">Confirmado #${order.number}</span>
+          <h4 class="text-xl font-bold mb-6 pb-4 border-b border-gray-100">Resumen del Pedido</h4>
+          <div class="order-items-list space-y-4 mb-6">${itemsHtml}</div>
+          <div class="flex justify-between items-center pt-5 border-t border-gray-100">
+            <p class="text-lg text-gray-500">Monto Total:</p>
+            <p class="font-black text-4xl text-stone-900">$<span id="demo-order-total">${order.total}</span></p>
+          </div>
+        `;
+        container.appendChild(orderCard);
+      });
+    }
+
   </script>
 </body>
 

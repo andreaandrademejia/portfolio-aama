@@ -23,6 +23,17 @@
       /* Asegura que el padding no deforme el tamaño */
       min-width: fit-content;
     }
+
+    /* Clase que simula el hover pero disparada por JS */
+    .card-active {
+      border-color: #0ef !important;
+      box-shadow: 0 0 20px rgba(0, 238, 255, 0.4);
+      transform: translateY(-12px);
+    }
+
+    .card-active i {
+      transform: scale(1.1);
+    }
   </style>
   <script>
     tailwind.config = {
@@ -46,15 +57,15 @@
 <body class="bg-bg-dark text-white font-poppins overflow-x-hidden">
 
   <header
-    class="fixed top-0 left-0 w-full px-[9%] py-6 bg-bg-dark/95 backdrop-blur-sm flex justify-between items-center z-[100] border-b border-white/5">
+    class="fixed top-0 left-0 w-full px-4 md:px-[9%] py-6 bg-bg-dark/95 backdrop-blur-sm flex justify-between items-center z-[100] border-b border-white/5">
     <div class="logo">
-      <a href="#" class="text-2xl font-black tracking-tight hover:text-main-cyan transition-colors">AAM <span
-          class="text-main-cyan text-sm block md:inline font-normal">Design Solutions</span></a>
+      <a href="#" class="text-xl md:text-2xl font-black tracking-tight hover:text-main-cyan transition-colors">
+        AAM <span class="text-main-cyan text-xs md:text-sm block md:inline font-normal">Design Solutions</span>
+      </a>
     </div>
 
     <nav id="navbar" class="hidden md:flex items-center gap-8">
-      <a href="#home"
-        class="text-lg font-medium hover:text-main-cyan transition-colors active text-main-cyan">Inicio</a>
+      <a href="#home" class="text-lg font-medium hover:text-main-cyan transition-colors text-main-cyan">Inicio</a>
       <a href="#about" class="text-lg font-medium hover:text-main-cyan transition-colors">Nosotros</a>
       <a href="#services" class="text-lg font-medium hover:text-main-cyan transition-colors">Servicios</a>
       <a href="#portfolio" class="text-lg font-medium hover:text-main-cyan transition-colors">Proyectos</a>
@@ -119,7 +130,7 @@
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         <div
-          class="bg-bg-dark p-10 rounded-3xl border-2 border-transparent hover:border-main-cyan transition-all duration-500 group text-center hover:-translate-y-3">
+          class="service-card bg-bg-dark p-10 rounded-3xl border-2 border-transparent hover:border-main-cyan transition-all duration-500 group text-center hover:-translate-y-3">
           <i class='bx bx-layout text-7xl text-main-cyan group-hover:scale-110 transition-transform block mb-4'></i>
           <h3 class="text-2xl font-bold mb-3">Diseño Web Pro</h3>
           <p class="text-gray-400">Páginas personalizadas: Básicas, Profesionales y Completas con optimización SEO para
@@ -127,7 +138,7 @@
         </div>
 
         <div
-          class="bg-bg-dark p-10 rounded-3xl border-2 border-transparent hover:border-main-cyan transition-all duration-500 group text-center hover:-translate-y-3">
+          class="service-card bg-bg-dark p-10 rounded-3xl border-2 border-transparent hover:border-main-cyan transition-all duration-500 group text-center hover:-translate-y-3">
           <i class='bx bx-receipt text-7xl text-main-cyan group-hover:scale-110 transition-transform block mb-4'></i>
           <h3 class="text-2xl font-bold mb-3">Facturación & Sistemas</h3>
           <p class="text-gray-400">Conectamos tu web a sistemas de facturación automática para tus clientes. Eficiencia
@@ -135,7 +146,7 @@
         </div>
 
         <div
-          class="bg-bg-dark p-10 rounded-3xl border-2 border-transparent hover:border-main-cyan transition-all duration-500 group text-center hover:-translate-y-3">
+          class="service-card bg-bg-dark p-10 rounded-3xl border-2 border-transparent hover:border-main-cyan transition-all duration-500 group text-center hover:-translate-y-3">
           <i
             class='bx bx-cloud-server text-7xl text-main-cyan group-hover:scale-110 transition-transform block mb-4'></i>
           <h3 class="text-2xl font-bold mb-3">Hosting & Dominios</h3>
@@ -144,7 +155,7 @@
         </div>
 
         <div
-          class="bg-bg-dark p-10 rounded-3xl border-2 border-transparent hover:border-main-cyan transition-all duration-500 group text-center hover:-translate-y-3">
+          class="service-card  bg-bg-dark p-10 rounded-3xl border-2 border-transparent hover:border-main-cyan transition-all duration-500 group text-center hover:-translate-y-3">
           <i class='bx bx-qr-code text-7xl text-main-cyan group-hover:scale-110 transition-transform block mb-4'></i>
           <h3 class="text-2xl font-bold mb-3">Menús & Tarjetas QR</h3>
           <p class="text-gray-400">Menús interactivos para restaurantes y tarjetas de presentación digitales de alta
@@ -152,7 +163,7 @@
         </div>
 
         <div
-          class="bg-bg-dark p-10 rounded-3xl border-2 border-transparent hover:border-main-cyan transition-all duration-500 group text-center hover:-translate-y-3">
+          class="service-card bg-bg-dark p-10 rounded-3xl border-2 border-transparent hover:border-main-cyan transition-all duration-500 group text-center hover:-translate-y-3">
           <i class='bx bxl-google text-7xl text-main-cyan group-hover:scale-110 transition-transform block mb-4'></i>
           <h3 class="text-2xl font-bold mb-3">Google Business</h3>
           <p class="text-gray-400">Creación y optimización de cuenta Google Business para aparecer en los primeros
@@ -160,7 +171,7 @@
         </div>
 
         <div
-          class="bg-bg-dark p-10 rounded-3xl border-2 border-transparent hover:border-main-cyan transition-all duration-500 group text-center hover:-translate-y-3">
+          class="service-card bg-bg-dark p-10 rounded-3xl border-2 border-transparent hover:border-main-cyan transition-all duration-500 group text-center hover:-translate-y-3">
           <i class='bx bx-briefcase text-7xl text-main-cyan group-hover:scale-110 transition-transform block mb-4'></i>
           <h3 class="text-2xl font-bold mb-3">Catálogos de Ventas</h3>
           <p class="text-gray-400">Portafolios para freelancers y catálogos digitales diseñados para convertir visitas
@@ -195,9 +206,7 @@
           <div
             class="absolute inset-0 bg-gradient-to-t from-bg-dark via-bg-dark/40 to-transparent opacity-90 md:opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
             <h4 class="text-2xl font-bold italic">Sitio Web Corporativo</h4>
-            <p class="text-main-cyan mb-4 font-medium text-sm">Ideal para: Cafeterías, Bares, Ferreterías,
-              Refaccionarias y Servicios
-              Técnicos.</p>
+            <p class="text-main-cyan mb-4 font-medium text-sm">Ideal para: Cafeterías, Bares, Ferreterías...</p>
             <p class="text-gray-200 text-sm mb-6">Presencia profesional con catálogo de productos y botón de cotización.
             </p>
             <a href="proyectos/proyecto2.html"
@@ -235,46 +244,61 @@
               Demo en Vivo</a>
           </div>
         </div>
-
       </div>
+      <div class="flex justify-center mt-16">
+        <div class="p-8 bg-white rounded-[2.5rem] border border-blue-50 text-center shadow-sm max-w-lg w-full">
+          <p class="text-slate-500 text-sm font-medium mb-4">¿Quieres visualizar todas nuestras demos?</p>
+          <a href="/proyectos/all-demos.html"
+            class="inline-flex items-center gap-2 bg-slate-800 text-white px-8 py-4 rounded-2xl font-bold hover:bg-blue-600 transition-all shadow-lg hover:shadow-blue-200">
+            <i class='bx bx-grid-alt'></i>
+            Hacer click en ver demos
+          </a>
+        </div>
+      </div>
+
     </section>
 
-    <section id="contact" class="py-24 px-[9%] bg-bg-second">
-      <h2 class="text-4xl md:text-5xl font-black text-center mb-16 italic">Contacto</h2>
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 max-w-6xl mx-auto">
+    <section id="contact" class="py-20 px-6 md:px-[9%] bg-bg-second">
+      <h2 class="text-4xl md:text-5xl font-black text-center mb-12 italic">Contacto</h2>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
         <div class="space-y-8">
-          <h3 class="text-3xl font-bold">¿Listo para empezar tu proyecto?</h3>
-          <p class="text-gray-400 text-lg">Hablemos sobre cómo AAM Design puede llevar tu administración y ventas al
-            siguiente nivel.</p>
+          <h3 class="text-2xl md:text-3xl font-bold text-center md:text-left">¿Listo para empezar tu proyecto?</h3>
+          <p class="text-gray-400 text-base md:text-lg text-center md:text-left">Hablemos sobre cómo AAM Design puede
+            llevar tu administración y ventas al siguiente nivel.</p>
 
           <div class="space-y-6">
             <div class="flex items-center gap-4">
-              <i class='bx bxl-whatsapp text-3xl text-main-cyan'></i>
-              <a href="https://wa.me/523313862743" class="text-xl hover:text-main-cyan transition-colors">Enviar
-                WhatsApp</a>
+              <i class='bx bxl-whatsapp text-3xl text-main-cyan shrink-0'></i>
+              <a href="https://wa.me/523313862743"
+                class="text-lg md:text-xl hover:text-main-cyan transition-colors">Enviar WhatsApp</a>
             </div>
-            <div class="flex items-center gap-4">
-              <i class='bx bx-envelope text-3xl text-main-cyan'></i>
+
+            <div class="flex items-center gap-4 w-full overflow-hidden">
+              <i class='bx bx-envelope text-3xl text-main-cyan shrink-0'></i>
               <a href="mailto:andreaandrademejia@gmail.com"
-                class="text-xl hover:text-main-cyan transition-colors">andreaandrademejia@gmail.com</a>
+                class="text-base md:text-xl hover:text-main-cyan transition-colors break-words overflow-hidden">
+                andreaandrademejia@gmail.com
+              </a>
             </div>
+
             <div class="flex items-center gap-4">
-              <i class='bx bx-map text-3xl text-main-cyan'></i>
-              <span class="text-xl">Zapopan, Jalisco.</span>
+              <i class='bx bx-map text-3xl text-main-cyan shrink-0'></i>
+              <span class="text-lg md:text-xl">Zapopan, Jalisco.</span>
             </div>
           </div>
         </div>
 
-        <form id="form" class="bg-bg-dark p-8 rounded-3xl border border-white/5 space-y-4 shadow-2xl">
+        <form id="form" class="bg-bg-dark p-6 md:p-8 rounded-3xl border border-white/5 space-y-4 shadow-2xl">
           <input type="text" placeholder="Nombre completo"
-            class="w-full p-4 bg-bg-second rounded-xl border border-white/10 focus:border-main-cyan outline-none transition-colors">
+            class="w-full p-4 bg-bg-second rounded-xl border border-white/10 focus:border-main-cyan outline-none text-white">
           <input type="email" placeholder="Correo electrónico"
-            class="w-full p-4 bg-bg-second rounded-xl border border-white/10 focus:border-main-cyan outline-none transition-colors">
+            class="w-full p-4 bg-bg-second rounded-xl border border-white/10 focus:border-main-cyan outline-none text-white">
           <textarea placeholder="Cuéntanos sobre tu negocio o proyecto" rows="5"
-            class="w-full p-4 bg-bg-second rounded-xl border border-white/10 focus:border-main-cyan outline-none transition-colors"></textarea>
+            class="w-full p-4 bg-bg-second rounded-xl border border-white/10 focus:border-main-cyan outline-none text-white"></textarea>
           <button type="submit"
-            class="w-full py-4 bg-main-cyan text-bg-dark font-black rounded-xl hover:scale-[1.02] transition-transform">ENVIAR
-            CONSULTA</button>
+            class="w-full py-4 bg-main-cyan text-bg-dark font-black rounded-xl hover:scale-[1.02] active:scale-95 transition-transform">
+            ENVIAR CONSULTA
+          </button>
         </form>
       </div>
     </section>
@@ -289,13 +313,14 @@
   </footer>
 
   <script src="https://unpkg.com/scrollreveal"></script>
+  <script type="module" src="assets/js/main.js"></script>
   <script>
-    // Lógica básica para el menú móvil
     const menuIcon = document.querySelector('#menu-icon');
     const navbar = document.querySelector('#navbar');
 
     menuIcon.onclick = () => {
       menuIcon.classList.toggle('bx-x');
+      // Esto aplica una clase de Tailwind para mostrar el menú como dropdown
       navbar.classList.toggle('hidden');
       navbar.classList.toggle('flex');
       navbar.classList.toggle('flex-col');
@@ -303,9 +328,20 @@
       navbar.classList.toggle('top-full');
       navbar.classList.toggle('left-0');
       navbar.classList.toggle('w-full');
-      navbar.classList.toggle('bg-bg-dark');
+      navbar.classList.toggle('bg-bg-dark/95');
       navbar.classList.toggle('p-8');
+      navbar.classList.toggle('border-b');
+      navbar.classList.toggle('border-white/10');
     };
+
+    // Cerrar menú al hacer click en un link
+    document.querySelectorAll('#navbar a').forEach(link => {
+      link.onclick = () => {
+        if (window.innerWidth < 768) {
+          menuIcon.click();
+        }
+      };
+    });
   </script>
 </body>
 

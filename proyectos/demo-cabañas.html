@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mazamitla Luxury Cabins | Catálogo Premium</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Marcellus&family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap');
+
+    :root {
+      --mexican-green: #0A3622;
+      --bright-gold: #FFD700;
+      --booked-blue: #3B82F6;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--mexican-green);
+      color: white;
+      scroll-behavior: smooth;
+      margin: 0;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    .font-serif {
+      font-family: 'Marcellus', serif;
+    }
+
+    .info-card {
+      background-color: white;
+      color: #1B2B24;
+      border-radius: 2.5rem;
+      padding: 2.5rem;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    }
+
+    .hide-scroll::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* Calendario Simulado */
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 5px;
+      max-width: 300px;
+    }
+
+    .day {
+      aspect-ratio: 1;
+      display: flex;
+      items-center;
+      justify-content: center;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: bold;
+      border: 1px solid #eee;
+    }
+
+    .available {
+      background: white;
+      color: #333;
+    }
+
+    .booked {
+      background: var(--booked-blue);
+      color: white;
+      border-color: var(--booked-blue);
+    }
+
+    /* Animaciones de transición */
+    .tab-content {
+      display: none;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .tab-btn.active {
+      background-color: var(--bright-gold);
+      color: var(--mexican-green);
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav
+    class="fixed w-full z-50 px-[5%] py-4 flex justify-between items-center backdrop-blur-md bg-black/40 border-b border-white/10">
+    <div class="flex items-center gap-2">
+      <i class='bx bx-landscape text-3xl text-[var(--bright-gold)]'></i>
+      <span class="text-xl font-bold tracking-tighter uppercase">Mazamitla <span
+          class="text-[var(--bright-gold)] font-light">Luxury</span></span>
+    </div>
+    <div class="hidden md:flex items-center gap-8">
+      <a href="#inicio" class="text-[var(--bright-gold)] font-bold uppercase text-xs">Inicio</a>
+      <a href="#reservas" class="text-[var(--bright-gold)] font-bold uppercase text-xs">Reservas</a>
+      <a href="#atracciones" class="text-[var(--bright-gold)] font-bold uppercase text-xs">Atracciones</a>
+      <button onclick="toggleLogin()"
+        class="bg-[var(--bright-gold)] text-[#0A3622] px-6 py-2 rounded-full text-xs font-black">MI CUENTA</button>
+    </div>
+  </nav>
+
+  <header id="inicio" class="relative min-h-screen flex items-center justify-center pt-20">
+    <img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?q=80&w=2000"
+      class="absolute inset-0 w-full h-full object-cover" alt="Hero">
+    <div class="absolute inset-0 bg-black/50"></div>
+
+    <div class="relative z-10 text-center w-full px-4">
+      <h1 class="text-5xl md:text-7xl mb-4">Mazamitla Luxury</h1>
+      <p class="text-[var(--bright-gold)] tracking-[0.3em] uppercase mb-12">Desde 1994 creando memorias en la montaña
+      </p>
+
+      <div
+        class="max-w-5xl mx-auto bg-white p-6 rounded-[2.5rem] shadow-2xl grid grid-cols-1 md:grid-cols-5 gap-4 items-end text-left">
+        <div>
+          <label class="text-[10px] font-bold text-gray-400 uppercase ml-2">Experiencia</label>
+          <select id="exp-type"
+            class="w-full mt-1 p-3 rounded-xl bg-gray-50 text-gray-800 font-bold border-none outline-none">
+            <option value="parejas">Parejas VIP</option>
+            <option value="familias">Familiar Premium</option>
+          </select>
+        </div>
+        <div>
+          <label class="text-[10px] font-bold text-gray-400 uppercase ml-2">Check-in</label>
+          <input type="date" class="w-full mt-1 p-3 rounded-xl bg-gray-50 text-gray-800 font-bold">
+        </div>
+        <div>
+          <label class="text-[10px] font-bold text-gray-400 uppercase ml-2">Check-out</label>
+          <input type="date" class="w-full mt-1 p-3 rounded-xl bg-gray-50 text-gray-800 font-bold">
+        </div>
+        <div>
+          <label class="text-[10px] font-bold text-gray-400 uppercase ml-2">Personas</label>
+          <input type="number" placeholder="2" class="w-full mt-1 p-3 rounded-xl bg-gray-50 text-gray-800 font-bold">
+        </div>
+        <button onclick="location.href='#reservas'"
+          class="bg-[#0A3622] text-[var(--bright-gold)] p-4 rounded-xl font-black uppercase hover:bg-black transition-all">Buscar
+          Cabaña</button>
+      </div>
+    </div>
+  </header>
+
+  <section id="reservas" class="py-24 px-[5%] max-w-[1600px] mx-auto">
+
+    <div id="section-parejas" class="mb-32">
+      <h2 class="text-4xl text-[var(--bright-gold)] text-center mb-12">Selecciona tu Cabaña Romántica</h2>
+      <div class="flex flex-wrap justify-center gap-4 mb-12">
+        <button onclick="showTab('rom-romantic', this)"
+          class="tab-btn active px-8 py-3 rounded-full border border-[var(--bright-gold)] font-bold uppercase text-xs transition-all">Romantic</button>
+        <button onclick="showTab('rom-luxury', this)"
+          class="tab-btn px-8 py-3 rounded-full border border-[var(--bright-gold)] font-bold uppercase text-xs transition-all">Luxury</button>
+        <button onclick="showTab('rom-golden', this)"
+          class="tab-btn px-8 py-3 rounded-full border border-[var(--bright-gold)] font-bold uppercase text-xs transition-all">Luxury
+          Golden</button>
+      </div>
+
+      <div id="rom-romantic" class="tab-content active info-card">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <div>
+            <div class="grid grid-cols-2 gap-2 h-[400px]">
+              <img src="https://images.unsplash.com/photo-1510798831971-661eb04b3739?w=600"
+                class="w-full h-full object-cover rounded-2xl col-span-2">
+              <img src="https://images.unsplash.com/photo-1449156001931-82992a472747?w=400"
+                class="w-full h-full object-cover rounded-2xl">
+              <img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=400"
+                class="w-full h-full object-cover rounded-2xl">
+            </div>
+          </div>
+          <div class="space-y-6">
+            <h3 class="text-4xl italic text-[#0A3622]">Cabaña Romantic</h3>
+            <p class="text-gray-600 italic">"El nido perfecto para la desconexión total."</p>
+            <p class="text-gray-500">Equipada con chimenea de piedra natural, cama Queen Size con sábanas de 600 hilos y
+              vista al arroyo.</p>
+
+            <div class="bg-blue-50 p-4 rounded-2xl">
+              <p class="text-[10px] font-bold text-blue-800 uppercase mb-3"><i class='bx bx-calendar-event'></i>
+                Disponibilidad Próxima</p>
+              <div class="calendar-grid">
+                <div class="day available">20</div>
+                <div class="day booked">21</div>
+                <div class="day booked">22</div>
+                <div class="day available">23</div>
+                <div class="day available">24</div>
+                <div class="day available">25</div>
+                <div class="day available">26</div>
+              </div>
+              <p class="text-[9px] mt-2 text-gray-400 font-bold uppercase">Blanco: Disponible | Azul: Ocupado</p>
+            </div>
+            <button class="w-full py-4 bg-[#0A3622] text-white rounded-xl font-bold">RESERVAR AHORA - $1,850</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="rom-luxury" class="tab-content info-card">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <div class="grid grid-cols-2 gap-2 h-[400px]">
+            <img src="https://images.unsplash.com/photo-1542718610-a1d656d1884c?w=800"
+              class="w-full h-full object-cover rounded-2xl col-span-2">
+            <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=400"
+              class="w-full h-full object-cover rounded-2xl">
+            <img src="https://images.unsplash.com/photo-1613977257363-707ba9348227?w=400"
+              class="w-full h-full object-cover rounded-2xl">
+          </div>
+          <div class="space-y-6">
+            <h3 class="text-4xl italic text-[#0A3622]">Cabaña Luxury</h3>
+            <p class="text-gray-600">Doble altura, ventanales panorámicos y tina de hidromasaje integrada en la
+              habitación principal.</p>
+            <div class="bg-blue-50 p-4 rounded-2xl">
+              <div class="calendar-grid">
+                <div class="day booked">20</div>
+                <div class="day booked">21</div>
+                <div class="day available">22</div>
+                <div class="day available">23</div>
+                <div class="day booked">24</div>
+                <div class="day booked">25</div>
+                <div class="day available">26</div>
+              </div>
+            </div>
+            <button class="w-full py-4 bg-[#0A3622] text-white rounded-xl font-bold">RESERVAR LUXURY - $2,900</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="rom-golden" class="tab-content info-card">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <div class="grid grid-cols-2 gap-2 h-[400px]">
+            <img src="https://images.unsplash.com/photo-1584132967334-10e028bd69f7?w=800"
+              class="w-full h-full object-cover rounded-2xl col-span-2">
+            <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=400"
+              class="w-full h-full object-cover rounded-2xl">
+            <img src="https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?w=400"
+              class="w-full h-full object-cover rounded-2xl">
+          </div>
+          <div class="space-y-6">
+            <h3 class="text-4xl italic text-[#0A3622]">Luxury Golden Diamond</h3>
+            <span
+              class="bg-[var(--bright-gold)] text-black text-[10px] font-black px-4 py-1 rounded-full uppercase">Experiencia
+              Imperial</span>
+            <p class="text-gray-600">Incluye Cuarto de Vapor, Jacuzzi XL, Cava de vinos privada y mayordomo 24/7.</p>
+            <div class="bg-blue-50 p-4 rounded-2xl">
+              <div class="calendar-grid">
+                <div class="day available">20</div>
+                <div class="day available">21</div>
+                <div class="day available">22</div>
+                <div class="day available">23</div>
+                <div class="day available">24</div>
+                <div class="day booked">25</div>
+                <div class="day booked">26</div>
+              </div>
+            </div>
+            <button
+              class="w-full py-4 bg-[#D4A373] text-white rounded-xl font-bold uppercase tracking-widest shadow-lg">Reserva
+              Golden - $5,500</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="section-familias">
+      <h2 class="text-4xl text-[var(--bright-gold)] text-center mb-12">Refugios Familiares</h2>
+      <div class="flex flex-wrap justify-center gap-4 mb-12">
+        <button onclick="showTab('fam-classic', this)"
+          class="tab-btn active px-8 py-3 rounded-full border border-[var(--bright-gold)] font-bold uppercase text-xs transition-all">Family
+          Classic</button>
+        <button onclick="showTab('fam-luxury', this)"
+          class="tab-btn px-8 py-3 rounded-full border border-[var(--bright-gold)] font-bold uppercase text-xs transition-all">Family
+          Luxury</button>
+        <button onclick="showTab('fam-mansion', this)"
+          class="tab-btn px-8 py-3 rounded-full border border-[var(--bright-gold)] font-bold uppercase text-xs transition-all">Family
+          Premium Mansion</button>
+      </div>
+
+      <div id="fam-classic" class="tab-content active info-card">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 text-[#0A3622]">
+          <img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=800"
+            class="w-full h-[300px] object-cover rounded-3xl mb-4 lg:mb-0">
+          <div>
+            <h3 class="text-3xl italic mb-4">Family Classic (4-6 Pers)</h3>
+            <p class="mb-6">Espacio ideal con tapanco para niños y área de fogata exterior.</p>
+            <div class="bg-blue-50 p-4 rounded-2xl mb-6">
+              <div class="calendar-grid">
+                <div class="day booked">1</div>
+                <div class="day booked">2</div>
+                <div class="day available">3</div>
+              </div>
+            </div>
+            <button class="w-full py-4 bg-[#0A3622] text-white rounded-xl font-bold">Reservar - $3,100</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="atracciones" class="py-24 px-[5%] bg-black/20">
+    <div class="text-center mb-16">
+      <h2 class="text-5xl text-white mb-4">Qué Visitar</h2>
+      <p class="text-[var(--bright-gold)] uppercase tracking-[0.4em] text-xs">Descubre la Sierra del Tigre</p>
+    </div>
+
+    <div class="flex gap-6 overflow-x-auto pb-10 hide-scroll snap-x">
+      <div
+        class="min-w-[300px] md:min-w-[450px] aspect-[4/5] relative rounded-[3rem] overflow-hidden group snap-center shadow-2xl">
+        <img src="https://images.unsplash.com/photo-1542118311-64e030e46107?w=1000"
+          class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+        <div
+          class="absolute inset-0 bg-[#0A3622]/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-10">
+          <h4 class="text-3xl text-[var(--bright-gold)] mb-2 font-serif">Cascada El Salto</h4>
+          <p class="text-white text-sm opacity-90">Senderismo entre pinos y caída de agua natural de 30 metros.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="bg-black/40 py-20 px-[10%] text-center border-t border-white/10">
+    <h2 class="text-3xl text-[var(--bright-gold)] mb-6">Mazamitla Luxury</h2>
+    <p class="text-gray-400 max-w-2xl mx-auto mb-10 text-sm">Desde hace más de tres décadas, Mazamitla Luxury se ha
+      consolidado como el estándar de oro en hospedaje de montaña en México, fusionando la calidez rústica con servicios
+      de clase mundial.</p>
+    <div class="flex justify-center gap-8 mb-10 text-2xl text-[var(--bright-gold)]">
+      <i class='bx bxl-instagram'></i><i class='bx bxl-facebook'></i><i class='bx bxl-whatsapp'></i>
+    </div>
+    <p class="text-[9px] opacity-30 uppercase tracking-widest">AAM DESIGN SOLUTIONS - 2026</p>
+  </footer>
+
+  <script>
+    function showTab(id, btn) {
+      // 1. Encontrar el contenedor de la sección (parejas o familias)
+      const parent = btn.closest('div').parentElement;
+
+      // 2. Ocultar todos los contenidos de esa sección
+      const contents = parent.querySelectorAll('.tab-content');
+      contents.forEach(c => c.classList.remove('active'));
+
+      // 3. Desactivar todos los botones de esa sección
+      const buttons = parent.querySelectorAll('.tab-btn');
+      buttons.forEach(b => b.classList.remove('active'));
+
+      // 4. Mostrar el seleccionado
+      document.getElementById(id).classList.add('active');
+      btn.classList.add('active');
+    }
+
+    function toggleLogin() {
+      alert("Iniciando sesión en Mazamitla Luxury...");
+    }
+  </script>
+</body>
+
+</html>
